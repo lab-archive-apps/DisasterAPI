@@ -1,0 +1,21 @@
+<header class="hero is-dark">
+    <div class="hero-head">
+        <div class="container">
+            <h4 class="title">
+                災害対応管理システム
+            </h4>
+        </div>
+    </div>
+</header>
+<nav class="navbar">
+    <div class="navbar-menu">
+        <div class="navbar-start" >
+        </div>
+        <div class="navbar-end">
+            <span id="user-field" class="">User Name : {{ params.session.user_id }} </span>
+            <form id="logout" action="{{ path_for('logout') }}" method="post">
+                <button class="button is-danger is-outlined">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>

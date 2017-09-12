@@ -1,0 +1,27 @@
+{% if(flash('errors')) %}
+    <div class="message is-danger">
+        <div class="message-body">
+            {% for msg in flash('errors') %}
+                <strong>Error : {{ msg }}</strong>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% if(flash('notice')) %}
+    <div class="notification is-primary">
+        <button class="delete"></button>
+        {% for msg in flash('notice') %}
+            <strong>Notice : {{ msg }}</strong>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if(flash('alert')) %}
+    <div class="notification is-warning">
+        <button class="delete"></button>
+        {% for msg in flash('alert') %}
+            <strong>Alert : {{ msg }}</strong>
+        {% endfor %}
+    </div>
+{% endif %}

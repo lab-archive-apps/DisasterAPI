@@ -1,0 +1,25 @@
+#logout {
+    margin: 5px 5px auto auto;
+}
+
+#user-field {
+    margin: 10px 10px auto auto;
+}
+
+#breadcrumb {
+    margin: 0;
+}
+
+.f-right {
+    float: right;
+    margin: 10px auto;
+}
+
+.card {
+    transition: all 0.15s 0s ease;
+    margin: 10px auto;
+}
+
+.card:hover {
+    box-shadow:0 0 7px;
+}

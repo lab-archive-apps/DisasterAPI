@@ -1,0 +1,32 @@
+{% block sidebar %}
+    <div class="message">
+        <div class="message-body">
+            <aside class="menu">
+                <p class="menu-label">メニュー</p>
+                <ul class="menu-list">
+                    <li><a href="{{ path_for('top') }}">ダッシュボード</a></li>
+                </ul>
+                <p class="menu-label">災害</p>
+                <ul class="menu-list">
+                    <li><a href="{{ path_for('disaster_index') }}">災害事例管理</a></li>
+                    <li><a href="{{ path_for('disaster_select') }}">災害対応情報管理</a></li>
+                </ul>
+                <p class="menu-label">防災計画</p>
+                <ul class="menu-list">
+                    <li><a href="{{ path_for('plan_index') }}">防災計画管理</a></li>
+                </ul>
+                <p class="menu-label">ToDoリスト</p>
+                <ul class="menu-list">
+                    <li><a href="{{ path_for('list_index') }}">ToDoリスト管理</a></li>
+                </ul>
+                <p class="menu-label">その他</p>
+                <ul class="menu-list">
+                    <li><a href="/settings">ユーザー管理</a></li>
+                </ul>
+                {#<ul class="menu-list">#}
+                    {#<li><a href="/users">ユーザー管理</a></li>#}
+                {#</ul>#}
+            </aside>
+        </div>
+    </div>
+{% endblock %}

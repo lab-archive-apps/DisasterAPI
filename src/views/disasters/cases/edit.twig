@@ -1,0 +1,100 @@
+{% extends 'layouts/_layout.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path_for('disaster_index') }}">災害事例管理</a></li>
+    <li><a href="#">編集</a></li>
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container-fluid">
+            <h1 class="title">編集</h1>
+
+            <hr>
+
+            <form action="{{ path_for('disaster_store') }}" method="post">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="disaster_name">災害名</label>
+                            </div>
+                            <div class="field-body">
+                                <input type="text" name="disaster[name]" id="disaster_name" class="input" value="{{ disaster.name }}" required>
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="disaster_date">発災日時</label>
+                            </div>
+                            <div class="field-body">
+                                <input type="date" name="disaster[date]" id="disaster_date" class="input" value="{{ disaster.date }}" required>
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="disaster_season">季節</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="control">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="disaster[season][]" value="春"> 春
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="disaster[season][]" value="夏"> 夏
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="disaster[season][]" value="秋"> 秋
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="disaster[season][]" value="冬"> 冬
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="disaster_class">種類</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="select">
+                                    <select id="disaster_class" name="disaster[class]" required>
+                                        <option disabled selected></option>
+                                        <option>地震</option>
+                                        <option>豪雨</option>
+                                        <option>噴火</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="disaster_scale">規模</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="select">
+                                    <select id="disaster_scale" name="disaster[scale]" required>
+                                        <option disabled selected></option>
+                                        <option>大規模</option>
+                                        <option>中規模</option>
+                                        <option>小規模</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped is-grouped-right">
+                            <div class="control">
+                                <button class="button is-success">更新</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

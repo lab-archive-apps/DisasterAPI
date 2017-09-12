@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>災害可視化システム {% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+</head>
+<body>
+    {% include 'staff/layouts/_header.twig' %}
+
+    {% block content %}{% endblock %}
+
+    <!-- TODO: scriptやcssはSlim のドキュメントルートは public/index.php のためそこからの相対パスを指定する． -->
+<script src="{{ public_path }}/js/staff/bundle.js"></script>
+    {% include 'staff/layouts/_footer.twig' %}
+{% block js %}{% endblock %}
+</body>
+</html>

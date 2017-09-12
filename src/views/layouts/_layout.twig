@@ -1,0 +1,29 @@
+{% extends 'layouts/_base.twig' %}
+
+
+
+{% block main %}
+    <nav id="breadcrumb" class="breadcrumb is-small" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="{{ path_for('top') }}">トップ</a></li>
+            {% block breadcrumb %}{% endblock %}
+        </ul>
+    </nav>
+    <section id="main-content" class="section">
+        <div class="columns">
+            <div class="column is-one-quarter">
+                {% include 'layouts/_sidebar.twig' %}
+            </div>
+            <div class="column">
+                {% include 'layouts/_notice.twig' %}
+
+                <div class="box" id="main-content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

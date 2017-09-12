@@ -1,0 +1,31 @@
+{% extends 'layouts/_layout.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path_for('user_index') }}">ユーザー管理</a></li>
+    <li><a href="#">新規登録</a></li>
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container-fluid">
+            <h1 class="title">新規登録</h1>
+
+            <hr>
+
+            <form action="{{ path_for('list_store') }}" method="post">
+                <div class="card">
+                    <div class="card-content">
+
+                    </div>
+                </div>
+
+                <br>
+                <div class="field is-grouped is-grouped-right">
+                    <div class="control">
+                        <button class="button is-primary">送信</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

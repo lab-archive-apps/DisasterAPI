@@ -1,0 +1,32 @@
+{% extends 'staff/layouts/_layout.twig' %}
+
+{% block content %}
+    <main id="top-field">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="card">
+                    <div class="card-block">
+
+                        <h4 class="card-title text-center">災害事例検索</h4>
+                        <br>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <form action="{{ path_for('staff_index') }}" method="get">
+                                <div class="form-group form-inline">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <input class="form-control form-control-lg" type="text" id="keyword"
+                                               placeholder="キーワード">
+                                        <div class="input-group-addon"><i class="now-ui-icons ui-1_zoom-bold"></i></div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">検索</button>
+                                </div>
+
+                                <a href="#" class="">詳細検索</a>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'layouts/_layout.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path_for('user_index') }}">ユーザー管理</a></li>
+    <li><a href="#">編集</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="notification is-primary">
+        <h1 class="title">Edit a User</h1>
+    </div>
+{% endblock %}

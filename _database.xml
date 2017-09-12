@@ -1,0 +1,23 @@
+<database>
+    <production>
+        <host></host>
+        <db></db>
+        <username></username>
+        <password></password>
+        <charset>utf8</charset>
+    </production>
+    <local>
+        <host>127.0.0.1</host>
+        <db></db>
+        <username></username>
+        <password></password>
+        <charset>utf8</charset>
+    </local>
+    <test>
+        <host></host>
+        <db></db>
+        <username></username>
+        <password></password>
+        <charset></charset>
+    </test>
+</database>

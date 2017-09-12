@@ -1,0 +1,21 @@
+{% extends 'layouts/_layout.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path_for('disaster_index') }}">災害事例管理</a></li>
+    <li><a href="#">{{ disaster.name }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container-fluid">
+            <h1 class="title">{{ disaster.name }}</h1>
+            <hr>
+
+            <div class="card">
+                <div class="card-content">
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

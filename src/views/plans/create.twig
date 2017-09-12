@@ -1,0 +1,88 @@
+{% extends 'layouts/_layout.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path_for('plan_index') }}">防災計画管理</a></li>
+    <li><a href="#">新規登録</a></li>
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container-fluid">
+            <h1 class="title">新規登録</h1>
+
+            <hr>
+
+            <form action="{{ path_for('plan_store') }}" method="post">
+                <div class="field is-horizontal is-left">
+                    <div class="field-label is-normal">
+                        <label class="label" for="name">名称</label>
+                    </div>
+                    <div class="field-body">
+                        <input type="text" name="name" id="name" class="input" placeholder="名称" required />
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="plan_title_0">タイトル</label>
+                            </div>
+                            <div class="field-body">
+                                <input type="text" name="plan[0][title]" id="plan_title_0" class="input" placeholder="タイトル" required />
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="plan_phase_0">時期</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="select">
+                                    <select id="plan_phase_0" name="plan[0][phase]" required>
+                                        <option disabled selected></option>
+                                        <option>災害発生前</option>
+                                        <option>災害発生直後</option>
+                                        <option>災害発生後</option>
+                                        <option>復旧/復興</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped is-grouped-multiline">
+                            <div class="field-label is-normal">
+                                <label class="label" for="plan_datetime_0">日時</label>
+                            </div>
+                            <div class="field-body">
+                                <input type="date" name="plan[0][s_date]" id="plan_start_0" class="input"
+                                       placeholder="開始日時" required />
+                                <input type="date" name="plan[0][e_date]" id="plan_end_0" class="input"
+                                       placeholder="終了日時" required />
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"></div>
+                            <div class="field-body">
+                                <textarea class="textarea is-medium" name="plan[0][content]" type="text" placeholder="概要"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br class="node">
+                <div class="field is-grouped is-grouped-right">
+                    <div class="control">
+                        <a class="button is-info" id="plan-add-btn"><span class="icon"><i class="fa fa-plus"></i></span><span>フォーム追加</span></a>
+                        <a class="button is-danger" id="plan-remove-btn"><span class="icon"><i class="fa fa-trash-o"></i></span>フォーム削除<span></span></a>
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary">送信</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

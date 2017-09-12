@@ -1,0 +1,49 @@
+{% extends 'layouts/_layout.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="#">防災計画</a></li>
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container-fluid">
+            <h1 class="title">防災計画管理</h1>
+            <hr>
+
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" type="text" placeholder="キーワード">
+                </div>
+                <div class="control">
+                    <a class="button is-info">
+                        検索
+                    </a>
+                </div>
+            </div>
+
+            <div class="f-right">
+                <a href="{{ path_for('plan_create') }}" class="button is-info">新規登録</a>
+            </div>
+
+            <table class="table is-fullwidth">
+                <thead>
+                <tr>
+                    <th>計画</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for p in plans %}
+                    <tr>
+                        <td><a href="{{ path_for('plan_show', {'planId':p.id}) }}">{{ p.name }}</a></td>
+                        <td>
+                            <a href="{{ path_for('plan_edit', {'planId':p.id}) }}" class="button is-warning">編集</a>
+                            <a href="{{ path_for('plan_delete', {'planId':p.id}) }}" class="button is-danger" id="delete-btn">削除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}
