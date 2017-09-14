@@ -32,7 +32,8 @@
             "App\\Models\\": "src/models/",
             "App\\Middleware\\": "src/middleware/",
             "App\\Config\\": "src/config/",
-            "App\\Auth\\": "src/auth/"
+            "App\\Auth\\": "src/auth/",
+            "App\\Search\\": "src/searches/"
         }
     },
 	"scripts": {

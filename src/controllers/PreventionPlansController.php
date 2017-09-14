@@ -71,9 +71,4 @@ class PreventionPlansController extends BaseController {
     public function delete(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
     }
-
-    public function toJson(Request $request, Response $response, $args){
-        $plans = PreventionPlan::query()->get()->toJson();
-        return $plans;
-    }
 }

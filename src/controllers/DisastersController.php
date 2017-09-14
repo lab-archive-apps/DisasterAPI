@@ -102,9 +102,4 @@ class DisastersController extends BaseController {
             'params' => $params
         ]);
     }
-
-    public function toJson(Request $request, Response $response, $args){
-        $disasters = Disaster::with(['corresponds'])->get()->toJson();
-        return $disasters;
-    }
 }

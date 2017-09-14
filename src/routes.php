@@ -6,6 +6,7 @@
 
 use App\Middleware\AuthMiddleware;
 use App\Middleware\PathMiddleware;
+use App\Middleware\CorsMiddleware;
 
 // Middleware
 $authMw = AuthMiddleware::getInstance();
@@ -13,6 +14,9 @@ $authMw->init($app->getContainer());
 
 $pathMw = PathMiddleware::getInstance();
 $pathMw->init($app->getContainer());
+
+$corsMw = CorsMiddleware::getInstance();
+$corsMw->init($app->getContainer());
 
 // Application Middleware
 $app->add($pathMw);
@@ -37,7 +41,6 @@ $app->group('/disasters', function(){
     // Select Disaster's list
     $this->get('/selects', '\App\Controller\DisastersController:select')->setName('disaster_select');
     $this->get('/create', '\App\Controller\DisastersController:create')->setName('disaster_create');
-    $this->get('/json', '\App\Controller\DisastersController:toJson')->setName('disaster_json');
     $this->post('', '\App\Controller\DisastersController:store')->setName('disaster_store');
     $this->group('/{disasterId}', function(){
         $this->get('', '\App\Controller\DisastersController:show')->setName('disaster_show');
@@ -65,7 +68,6 @@ $app->group('/disasters', function(){
 $app->group('/plans', function(){
     $this->get('', '\App\Controller\PreventionPlansController:index')->setName('plan_index');
     $this->get('/create', '\App\Controller\PreventionPlansController:create')->setName('plan_create');
-    $this->get('/json', '\App\Controller\PreventionPlansController:toJson')->setName('plan_json');
     $this->post('', '\App\Controller\PreventionPlansController:store')->setName('plan_store');
     $this->group('/{planId}', function(){
         $this->get('', '\App\Controller\PreventionPlansController:show')->setName('plan_show');
@@ -79,7 +81,6 @@ $app->group('/plans', function(){
 $app->group('/lists', function(){
     $this->get('', '\App\Controller\TodoListsController:index')->setName('list_index');
     $this->get('/create', '\App\Controller\TodoListsController:create')->setName('list_create');
-    $this->get('/json', '\App\Controller\TodoListsController:toJson')->setName('list_json');
     $this->post('', '\App\Controller\TodoListsController:store')->setName('list_store');
     $this->group('/{listId}', function(){
         $this->get('', '\App\Controller\TodoListsController:show')->setName('list_show');
@@ -93,7 +94,6 @@ $app->group('/lists', function(){
 $app->group('/users', function(){
     $this->get('', '\App\Controller\UsersController:index')->setName('user_index');
     $this->get('/create', '\App\Controller\UsersController:create')->setName('user_create');
-    $this->get('/json', '\App\Controller\UsersController:toJson')->setName('user_json');
     $this->post('', '\App\Controller\UsersController:store')->setName('user_store');
     $this->group('/{userId}', function(){
         $this->get('', '\App\Controller\UsersController:show')->setName('user_show');
@@ -103,10 +103,11 @@ $app->group('/users', function(){
     });
 })->add($authMw);
 
-
-// Staff Visualization System
-$app->group('/staff', function(){
-    $this->get('', '\App\Controller\StaffController:top')->setName('staff_top');
-    $this->get('/index', '\App\Controller\StaffController:index')->setName('staff_index');
-});
-
+/* Web API */
+$app->get('/getDisaster', '\App\Controller\JsonController:getDisaster')->setName('get_disaster')->add($corsMw);
+$app->get('/getDisasters', '\App\Controller\JsonController:getDisasters')->setName('get_disasters')->add($corsMw);
+$app->get('/getPlan', '\App\Controller\JsonController:getPlans')->setName('get_plan')->add($corsMw);
+$app->get('/getPlans', '\App\Controller\JsonController:getPlans')->setName('get_plans')->add($corsMw);
+$app->get('/getList', '\App\Controller\JsonController:getLists')->setName('get_list')->add($corsMw);
+$app->get('/getLists', '\App\Controller\JsonController:getLists')->setName('get_lists')->add($corsMw);
+$app->get('/getUsers', '\App\Controller\JsonController:getUsers')->setName('get_users')->add($corsMw);

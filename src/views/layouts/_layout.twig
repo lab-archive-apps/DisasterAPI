@@ -1,6 +1,8 @@
 {% extends 'layouts/_base.twig' %}
 
-
+{% block header %}
+    {% include 'layouts/_header.twig' %}
+{% endblock %}
 
 {% block main %}
     <nav id="breadcrumb" class="breadcrumb is-small" aria-label="breadcrumbs">
@@ -26,4 +28,5 @@
 {% endblock %}
 
 {% block footer %}
+    {% include 'layouts/_footer.twig' %}
 {% endblock %}

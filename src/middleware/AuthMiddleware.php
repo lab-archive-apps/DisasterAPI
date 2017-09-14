@@ -5,7 +5,7 @@ namespace App\Middleware;
 use App\Auth\Session;
 use App\Config\SingletonCore;
 
-// セッション認証管理
+// Set up Authorization
 final class AuthMiddleware extends SingletonCore{
 
     private $session;   // Session
@@ -15,9 +15,9 @@ final class AuthMiddleware extends SingletonCore{
 
     public function __invoke($request, $response, $next)
     {
-        // ここに前処理 //
+        // before process //
 
-        // ログインしていなかったらリダイレクト
+        // Redirect if not login.
         if(!$this->session->state()){
             $this->flash->addMessage('errors', 'ログインしてください');
             return $response->withRedirect('/');
@@ -25,7 +25,7 @@ final class AuthMiddleware extends SingletonCore{
 
         $response = $next($request, $response);
 
-        // ここには後処理 //
+        // after process //
 
         return $response;
     }

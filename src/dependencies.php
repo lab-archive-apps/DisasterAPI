@@ -43,7 +43,3 @@ $container['logger'] = function ($c) {
 $container['flash'] = function () {
     return new \Slim\Flash\Messages();
 };
-
-$container['AuthController'] = function($c){
-    return new \App\Controller\AuthController($c);
-};
