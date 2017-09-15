@@ -1,6 +1,7 @@
 /vendor/
 /logs/*
 !/logs/README.md
-node_modules
+node_modules/
 .idea/
 database.xml
+public/js/app.js

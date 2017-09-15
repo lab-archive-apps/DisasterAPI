@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Models\Disaster;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Models\DisasterCoordinate;
 
 /* Disaster Management Controller */
 class DisastersController extends BaseController {
@@ -51,6 +52,13 @@ class DisastersController extends BaseController {
         $disaster->fill(json_decode(json_encode($params->post->disaster), true));
 
         if($disaster->save()){
+            $coordinates = [];
+            foreach($params->post->disaster->coordinates as $key => $value){
+                $coordinate = new DisasterCoordinate();
+                $coordinate->fill(json_decode(json_encode($value), true));
+                $coordinates[] = $coordinate;
+            }
+            $disaster->coordinates()->saveMany($coordinates);
             $this->flash->addMessage('notice', '登録が完了しました．');
             return $response->withRedirect($this->router->pathFor('disaster_index', [], []));
         }else{

@@ -42,7 +42,10 @@
                         <td>{{ d.class }}</td>
                         <td>
                             <a href="{{ path_for('disaster_edit', {'disasterId':d.id}) }}" class="button is-warning">編集</a>
-                            <a href="{{ path_for('disaster_delete', {'disasterId':d.id}) }}" class="button is-danger" id="delete-btn">削除</a>
+                            <form action="{{ path_for('disaster_delete', {'disasterId':d.id}) }}" method="POST" style="display: inline-block">
+                                <input type="hidden" name="_METHOD" value="DELETE"/>
+                                <button class="button is-danger" id="delete-btn">削除</button>
+                            </form>
                             <a href="{{ path_for('correspond_index', {'disasterId':d.id}) }}" class="button is-success">対応情報確認</a>
                         </td>
                     </tr>

@@ -11,7 +11,7 @@ module.exports = {
     watch: true, // watchモードを有効化
     entry: {
         bundle: './src/assets/js/bundle.js',
-        "staff/bundle": './src/assets/js/staff/bundle.js'
+        app: './src/assets/js/app.js'
     }, // エントリーポイントの設定
     output: {
         // filename: 'bundle.js', // 出力ファイル名
@@ -48,13 +48,9 @@ module.exports = {
             },
             /* Image */
             {
-                test: /\.(jpg|png)$/,
+                test: /\.(jpg|png|gif)$/,
                 loaders: 'url-loader'
             },
-            {
-                test: /\.vue$/,
-                loader: 'vue'
-            }
         ]
     },
     plugins: [ // プラグイン

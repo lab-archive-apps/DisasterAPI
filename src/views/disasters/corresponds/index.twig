@@ -39,7 +39,10 @@
                         <td>{{ c.section }}</td>
                         <td>
                             <a href="{{ path_for('correspond_edit', {'disasterId':disaster.id, 'correspondId':c.id}) }}" class="button is-warning">編集</a>
-                            <a href="{{ path_for('correspond_delete', {'disasterId':disaster.id, 'correspondId':c.id}) }}" class="button is-danger" id="delete-btn">削除</a>
+                            <form action="{{ path_for('correspond_delete', {'disasterId':disaster.id, 'correspondId':c.id}) }}" method="POST" style="display: inline-block">
+                                <input type="hidden" name="_METHOD" value="DELETE"/>
+                                <button class="button is-danger" id="delete-btn">削除</button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}

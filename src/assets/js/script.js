@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-/* 削除ボタンを押下した時にアラートを出力する */
+/* Print Alert if push delete button. */
 const deleteBtn = document.getElementById('delete-btn');
 
 if(!Object.is(deleteBtn, null)){
@@ -11,7 +11,7 @@ if(!Object.is(deleteBtn, null)){
     });
 }
 
-/* ToDoリストのフォーム増減機能 */
+/* Form control function on "lists" */
 const list = {
     currentNum: 0,
     template:   '<div class="field-body">' +
@@ -42,12 +42,12 @@ const listAddBtn = document.getElementById('list-add-btn');
 const listRemoveBtn = document.getElementById('list-remove-btn');
 
 if(!Object.is(listAddBtn, null) && !Object.is(listRemoveBtn, null)) {
-    listAddBtn.addEventListener('click', list.add);       // 追加
-    listRemoveBtn.addEventListener('click', list.remove); // 削除
+    listAddBtn.addEventListener('click', list.add);       // add
+    listRemoveBtn.addEventListener('click', list.remove); // remove
 }
 
 
-/* 防災計画のフォーム増減機能 */
+/* Form control on "Prevention plan". */
 const plan = {
     currentNum: 0,
     template:       '<div class="card-content">' +
@@ -108,11 +108,11 @@ const planAddBtn = document.getElementById('plan-add-btn');
 const planRemoveBtn = document.getElementById('plan-remove-btn');
 
 if(!Object.is(planAddBtn, null) && !Object.is(planRemoveBtn, null)) {
-    planAddBtn.addEventListener('click', plan.add);       // 追加
-    planRemoveBtn.addEventListener('click', plan.remove); // 削除
+    planAddBtn.addEventListener('click', plan.add);       // add
+    planRemoveBtn.addEventListener('click', plan.remove); // remove
 }
 
-/* 対応情報記録のファイルアップロード */
+/* File upload on correspond records. */
 const correspond = {
     upload: (e) => {
         const files = e.target.files; // FileList object

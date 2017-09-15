@@ -38,7 +38,10 @@
                         <td><a href="{{ path_for('plan_show', {'planId':p.id}) }}">{{ p.name }}</a></td>
                         <td>
                             <a href="{{ path_for('plan_edit', {'planId':p.id}) }}" class="button is-warning">編集</a>
-                            <a href="{{ path_for('plan_delete', {'planId':p.id}) }}" class="button is-danger" id="delete-btn">削除</a>
+                            <form action="{{ path_for('plan_delete', {'planId':p.id}) }}" method="POST" style="display: inline-block">
+                                <input type="hidden" name="_METHOD" value="DELETE"/>
+                                <button class="button is-danger" id="delete-btn">削除</button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}

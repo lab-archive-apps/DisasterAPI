@@ -65,3 +65,15 @@ CREATE TABLE files(
   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
 --   FOREIGN KEY (resource_id) REFERENCES lectures(id) ON DELETE CASCADE
 )ENGINE=INNODB;
+
+CREATE TABLE disaster_coordinates(
+  id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  disaster_id INTEGER(11),
+  label VARCHAR(255),
+  type VARCHAR(50),
+  latitude DOUBLE,
+  longitude DOUBLE,
+  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+  FOREIGN KEY (disaster_id) REFERENCES disasters(id) ON DELETE CASCADE
+)

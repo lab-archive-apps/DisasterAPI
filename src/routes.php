@@ -23,7 +23,7 @@ $app->add($pathMw);
 
 // public path
 // FIXME: グローバル変数で public_pathを求める方法があれば即座にそちらへ変更する
-$app->any(__DIR__ . '/../public/', function(){})->setName('public_path');
+//$app->any(__DIR__ . '/../public/', function(){})->setName('public_path');
 
 // Login Process
 $app->get('/', '\App\Controller\AuthController:getLogin')->setName('root');

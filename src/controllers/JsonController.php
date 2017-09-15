@@ -19,7 +19,12 @@ class JsonController extends BaseController {
 
     /* Get disaster with corresponds */
     public function getDisaster(Request $request, Response $response, $args){
-        $disasters = Disaster::query()->with(['corresponds'])->get()->toJson();
+        $params = $request->getAttribute('params');
+
+        $disasters = Disaster::query()
+            ->where('id', $params->get->disasterId)
+            ->with(['corresponds', 'coordinates'])
+            ->get()->toJson();
         return $disasters;
     }
 
@@ -35,24 +40,32 @@ class JsonController extends BaseController {
 
     /* Get prevention plan */
     public function getPlan(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+
         $plans = PreventionPlan::query()->get()->toJson();
         return $plans;
     }
 
     /* Get plans name. */
     public function getPlans(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+
         $plans = PreventionPlan::query()->get()->toJson();
         return $plans;
     }
 
     /* Get list with messages. */
     public function getList(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+
         $lists = BaseList::with(['messages'])->get()->toJson();
         return $lists;
     }
 
     /* Get lists name */
     public function getLists(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+
         $lists = BaseList::query()->get()->toJson();
         return $lists;
     }

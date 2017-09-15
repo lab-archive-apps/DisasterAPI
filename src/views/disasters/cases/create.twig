@@ -40,62 +40,167 @@
                             <div class="field-body">
                                 <div class="field is-grouped is-grouped-multiline">
                                     <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]" value="春"> 春</label>
+                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]"
+                                                                       value="春"> 春</label>
                                     </div>
                                     <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]" value="夏"> 夏</label>
+                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]"
+                                                                       value="夏"> 夏</label>
                                     </div>
                                     <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]" value="秋"> 秋</label>
+                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]"
+                                                                       value="秋"> 秋</label>
                                     </div>
                                     <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]" value="冬"> 冬</label>
+                                        <label class="checkbox"><input type="checkbox" name="disaster[season][]"
+                                                                       value="冬"> 冬</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label" for="disaster_class">種類</label>
-                        </div>
-                        <div class="field-body">
-                            <div class="select">
-                                <select id="disaster_class" name="disaster[class]" required>
-                                    <option disabled selected></option>
-                                    <option>地震</option>
-                                    <option>豪雨</option>
-                                    <option>噴火</option>
-                                </select>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="disaster_class">種類</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="select">
+                                    <select id="disaster_class" name="disaster[class]" required>
+                                        <option disabled selected></option>
+                                        <option>地震</option>
+                                        <option>豪雨</option>
+                                        <option>噴火</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label" for="disaster_scale">規模</label>
-                        </div>
-                        <div class="field-body">
-                            <div class="select">
-                                <select id="disaster_scale" name="disaster[scale]" required>
-                                    <option disabled selected></option>
-                                    <option>大規模</option>
-                                    <option>中規模</option>
-                                    <option>小規模</option>
-                                </select>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="disaster_scale">規模</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="select">
+                                    <select id="disaster_scale" name="disaster[scale]" required>
+                                        <option disabled selected></option>
+                                        <option>大規模</option>
+                                        <option>中規模</option>
+                                        <option>小規模</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="field is-grouped is-grouped-right">
-                        <div class="control">
-                            <button class="button is-primary">送信</button>
+                        <div class="field" id="coordinates">
+                            <label class="label" for="disaster_coordinates">被害範囲の登録</label>
+                            <p>地図上をクリックすることで被害エリアを登録することができます．</p>
+                            <button type="reset" class="button" id="map-reset">マップリセット</button>
+                            <div id="disaster-map"></div>
+                        </div>
+
+                        <div class="field is-grouped is-grouped-right">
+                            <div class="control">
+                                <button class="button is-primary">送信</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-        </div>
-        </form>
+
+            </form>
         </div>
     </section>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script>
+        var url = location.protocol + '//' + location.host;
+        var ibarakiUniv = {
+            HITACHI: { lat: 36.572377, lng: 140.641972 },
+        };
+        // number of position
+        var i = 1;
+        // get DOM
+        var coordinates = document.getElementById('coordinates');
+
+        /* === Leaflet Config === */
+        var icon = L.icon({
+            iconUrl:      url + '/images/marker-icon.png',
+            iconSize:     [25, 35],
+            iconAnchor:   [15, 30],
+            shadowUrl:    url + '/images/marker-shadow.png',
+            shadowSize: [45, 50],
+            shadowAnchor: [17, 45]
+        });
+        // create Open Street Map
+        var disasterMap = L.map('disaster-map').setView([ibarakiUniv.HITACHI.lat, ibarakiUniv.HITACHI.lng], 15);
+        var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 17,
+            minZoom: 11
+        });
+        tileLayer.addTo(disasterMap);
+        var features = new L.FeatureGroup();
+        var _polygon = [];
+        var mapPolygon = null;
+        /* === end === */
+
+        disasterMap.on('click', function (e){
+            if(_polygon.length < 8){
+                var lat = createCoordinate('latitude');
+                var lng = createCoordinate('longitude');
+                var type = createCoordinate('type');
+                lat.value = e.latlng.lat;
+                lng.value = e.latlng.lng;
+                type.value = 'polygon';
+
+                // push latlng to "polygon array"
+                _polygon.push([e.latlng.lat, e.latlng.lng]);
+
+                // if marker'count is over 3, set polygon to map
+                if(_polygon.length > 2){
+                    if(mapPolygon !== null) disasterMap.removeLayer(mapPolygon);
+                    mapPolygon = L.polygon(_polygon, {color: 'red'});
+                    mapPolygon.addTo(disasterMap);
+                }
+
+                // create marker
+                var marker = L.marker([e.latlng.lat, e.latlng.lng], { icon: icon })
+                    // .bindPopup('<input class="input" name="disaster[coordinates][' + i +'][label]" value="Position ' + i + '"/>',
+                    .bindPopup('地点 ' + i,
+                        {
+                            minWidth: 70
+                        });
+                features.addLayer(marker);
+                disasterMap.addLayer(features);
+
+                // set input dom to html.
+                coordinates.appendChild(lat);
+                coordinates.appendChild(lng);
+                coordinates.appendChild(type);
+                i++;
+            }else {
+                alert('これ以上登録できません．');
+            }
+        });
+
+        // remove all features
+        document.querySelector('#map-reset').onclick = function(e) {
+            if(confirm('本当に削除してよろしいですか？')){
+                if(mapPolygon !== null) disasterMap.removeLayer(mapPolygon);
+                disasterMap.removeLayer(features);
+                features = new L.FeatureGroup();
+                _polygon = [];
+                i = 1;
+            }
+        };
+
+        // create input element
+        function createCoordinate(name){
+            var _obj = document.createElement('input');
+            _obj.setAttribute('type', 'hidden');
+            _obj.setAttribute('name', 'disaster[coordinates][' + i + '][' + name + ']');
+            return _obj;
+        }
+    </script>
 {% endblock %}
