@@ -13,7 +13,7 @@ class PreventionPlan extends BaseModel {
         return $this->belongsTo(BasePlan::class);
     }
 
-    // create メソッド使用時に許可するカラム
+    // enable params when called create method.
     protected $fillable = [
         'plan_id',
         'title',

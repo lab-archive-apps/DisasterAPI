@@ -13,7 +13,7 @@ class TodoList extends BaseModel {
         return $this->belongsTo(BaseList::class);
     }
 
-    // create メソッド使用時に許可するカラム
+    // enable params when called create method.
     protected $fillable = [
         'list_id',
         'message',

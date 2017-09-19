@@ -40,33 +40,11 @@
                             </div>
                             <div class="field-body">
                                 <div class="field is-grouped is-grouped-multiline">
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="ライフライン"> ライフライン</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="物資"> 物資</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="通行止め"> 通行止め</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="被害"> 被害</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="水道"> 水道</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="電気"> 電気</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="避難所"> 避難所</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="報告"> 報告</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="radio"><input type="radio" name="correspond[section]" value="その他"> その他</label>
-                                    </div>
+                                    {% for section in sections %}
+                                        <div class="control">
+                                            <label class="radio"><input type="radio" name="correspond[section]" value="{{ section.name }}"> {{ section.name }}</label>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -77,34 +55,12 @@
                             </div>
                             <div class="field-body">
                                 <div class="field is-grouped is-grouped-multiline">
-                                    <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
-                                                                       value="対策本部設置"> 対策本部設置</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
-                                                                       value="通行止め箇所発生"> 通行止め箇所発生</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
-                                                                       value="被害箇所発見"> 被害箇所発見</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
-                                                                       value="水道情報更新"> 水道情報更新</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
-                                                                       value="電気情報更新"> 電気情報更新</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
-                                                                       value="物資の到着"> 物資の到着</label>
-                                    </div>
-                                    <div class="control">
-                                        <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
-                                                                       value="緊急報告"> 緊急報告</label>
-                                    </div>
+                                    {% for content in contents %}
+                                        <div class="control">
+                                            <label class="checkbox"><input type="checkbox" name="correspond[contents][]"
+                                                                           value="{{ content.name }}"> {{ content.name }}</label>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

@@ -40,7 +40,7 @@
                             <a href="{{ path_for('user_edit', {'userId':u.id}) }}" class="button is-warning">編集</a>
                             <form action="{{ path_for('user_delete', {'userId':u.id}) }}" method="POST" style="display: inline-block">
                                 <input type="hidden" name="_METHOD" value="DELETE"/>
-                                <button class="button is-danger" id="delete-btn">削除</button>
+                                <button class="button is-danger delete-btn" id="">削除</button>
                             </form>
                         </td>
                     </tr>

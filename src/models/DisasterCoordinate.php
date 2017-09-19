@@ -13,7 +13,7 @@ class DisasterCoordinate extends BaseModel {
         return $this->belongsTo('App\Models\Disaster');
     }
 
-    // create メソッド使用時に許可するカラム
+    // enable params when called create method.
     protected $fillable = [
         'disaster_id',
         'label',

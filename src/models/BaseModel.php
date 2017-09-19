@@ -11,7 +11,7 @@ use App\Config\DBManager;
  */
 class BaseModel extends Model{
     public function __construct(array $attributes = array()){
-        // Database への接続
+        // Connect to database
         DBManager::getInstance()->init();
 
         parent::__construct($attributes);

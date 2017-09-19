@@ -28,7 +28,7 @@ class AuthController extends BaseController{
             ->where('password', $params->post->user->password)
             ->get()->first();
 
-        // ログイン失敗
+        // Login failed.
         if (count($user) < 1) {
             $this->flash->addMessage('errors', 'ログインに失敗しました．ユーザーIDまたはパスワードが間違っています');
             return $response->withRedirect($this->router->pathFor('root', [], [
@@ -36,8 +36,8 @@ class AuthController extends BaseController{
             ]));
         }
 
-        // ログイン成功
-        // セッション情報を保存
+        // Login success.
+        // save a session data.
         $this->session->put([
             'state' => true,
             'id' => $user->id,

@@ -133,7 +133,7 @@
             shadowAnchor: [17, 45]
         });
         // create Open Street Map
-        var disasterMap = L.map('disaster-map').setView([ibarakiUniv.HITACHI.lat, ibarakiUniv.HITACHI.lng], 15);
+        var disasterMap = L.map('disaster-map').setView([ibarakiUniv.HITACHI.lat, ibarakiUniv.HITACHI.lng], 11);
         var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
             maxZoom: 17,
@@ -186,7 +186,7 @@
 
         // remove all features
         document.querySelector('#map-reset').onclick = function(e) {
-            if(confirm('本当に削除してよろしいですか？')){
+            if(confirm('マップ上のアイコンなどがクリアされます．よろしいですか？')){
                 if(mapPolygon !== null) disasterMap.removeLayer(mapPolygon);
                 disasterMap.removeLayer(features);
                 features = new L.FeatureGroup();

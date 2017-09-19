@@ -1,19 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tatsuya
- * Date: 2017/08/03
- * Time: 12:04
- */
 
 namespace App\Controller;
 
+use App\Models\DisasterCoordinate;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\Disaster;
 use App\Models\PreventionPlan;
 use App\Models\BaseList;
 use App\Search\DisasterSearch;
+use App\Models\DisasterCorrespondSection as Section;
 
 class JsonController extends BaseController {
 
@@ -21,9 +17,10 @@ class JsonController extends BaseController {
     public function getDisaster(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
 
+        // TODO: not use find(), because it if returned "[]", slim3 would call "500 error".
         $disasters = Disaster::query()
             ->where('id', $params->get->disasterId)
-            ->with(['corresponds', 'coordinates'])
+            ->with(['corresponds'])
             ->get()->toJson();
         return $disasters;
     }
@@ -36,6 +33,22 @@ class JsonController extends BaseController {
         $disasters = $query->search();
 
         return $disasters;
+    }
+
+    /* Get Disaster coordinates */
+    public function getDisasterCoordinates(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+        $coordinates = DisasterCoordinate::query()
+            ->where('disaster_id', $params->get->disasterId)
+            ->get()->toJson();
+        return $coordinates;
+    }
+
+    /* Get disaster correspond sections. */
+    public function getSections(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+        $sections = Section::query()->get(['id', 'name'])->toJson();
+        return $sections;
     }
 
     /* Get prevention plan */

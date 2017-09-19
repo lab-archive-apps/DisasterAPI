@@ -1,13 +1,13 @@
 {% extends 'layouts/_layout.twig' %}
 
 {% block breadcrumb %}
-    <li><a href="#">災害事例管理</a></li>
+    <li><a href="#">災害対応コンテンツ管理</a></li>
 {% endblock %}
 
 {% block content %}
     <section class="section">
         <div class="container-fluid">
-            <h1 class="title">災害事例管理</h1>
+            <h1 class="title">災害対応コンテンツ管理</h1>
             <hr>
 
             <div class="field has-addons">
@@ -22,31 +22,26 @@
             </div>
 
             <div class="f-right">
-                <a href="{{ path_for('disaster_create') }}" class="button is-info">新規登録</a>
+                <a href="{{ path_for('content_create') }}" class="button is-info">新規登録</a>
             </div>
 
-            <table class="table is-fullwidth is-striped">
+            <table class="table is-fullwidth">
                 <thead>
                 <tr>
-                    <th>災害事例</th>
-                    <th>日時</th>
-                    <th>種類</th>
+                    <th>災害対応コンテンツID</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for d in disasters %}
+                {% for c in contents %}
                     <tr>
-                        <td><a href="{{ path_for('disaster_show', {'disasterId':d.id}) }}">{{ d.name }}</a></td>
-                        <td>{{ d.date }}</td>
-                        <td>{{ d.class }}</td>
+                        <td>{{ c.name }}</td>
                         <td>
-                            <a href="{{ path_for('disaster_edit', {'disasterId':d.id}) }}" class="button is-warning">編集</a>
-                            <form action="{{ path_for('disaster_delete', {'disasterId':d.id}) }}" method="POST" style="display: inline-block">
+                            <a href="{{ path_for('content_edit', {'contentId':c.id}) }}" class="button is-warning">編集</a>
+                            <form action="{{ path_for('content_delete', {'contentId':c.id}) }}" method="POST" style="display: inline-block">
                                 <input type="hidden" name="_METHOD" value="DELETE"/>
                                 <button class="button is-danger delete-btn" id="">削除</button>
                             </form>
-                            <a href="{{ path_for('correspond_index', {'disasterId':d.id}) }}" class="button is-success">対応情報確認</a>
                         </td>
                     </tr>
                 {% endfor %}

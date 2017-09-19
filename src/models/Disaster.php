@@ -17,7 +17,7 @@ class Disaster extends BaseModel{
         return $this->hasMany('App\Models\DisasterCoordinate', 'disaster_id');
     }
 
-    // create メソッド使用時に許可するカラム
+    // enable params when called create method.
     protected $fillable = [
         'name',
         'date',

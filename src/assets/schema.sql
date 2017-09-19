@@ -76,4 +76,18 @@ CREATE TABLE disaster_coordinates(
   created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
   FOREIGN KEY (disaster_id) REFERENCES disasters(id) ON DELETE CASCADE
-)
+)ENGINE=INNODB;
+
+CREATE TABLE disaster_correspond_contents(
+  id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(128),
+  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
+)ENGINE=INNODB;
+
+CREATE TABLE disaster_correspond_sections(
+  id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(128),
+  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
+)ENGINE=INNODB;

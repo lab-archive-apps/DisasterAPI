@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Models\Disaster;
 use App\Models\DisasterCorrespond;
+use App\Models\DisasterCorrespondSection as Section;
+use App\Models\DisasterCorrespondContent as Content;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use App\Models\Disaster;
+
 
 /* Disaster Corresponds Management Controller */
 class DisasterCorrespondsController extends BaseController {
@@ -23,9 +26,13 @@ class DisasterCorrespondsController extends BaseController {
     public function create(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
         $disaster = Disaster::find($args['disasterId']);
+        $sections = Section::all();
+        $contents = Content::all();
         return $this->view->render($response, '/disasters/corresponds/create.twig', [
             'params' => $params,
-            'disaster' => $disaster
+            'disaster' => $disaster,
+            'sections' => $sections,
+            'contents' => $contents
         ]);
     }
 
@@ -41,9 +48,13 @@ class DisasterCorrespondsController extends BaseController {
     public function edit(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
         $disaster = Disaster::find($args['disasterId']);
+        $sections = Section::all();
+        $contents = Content::all();
         return $this->view->render($response, '/disasters/corresponds/edit.twig', [
             'params' => $params,
-            'disaster' => $disaster
+            'disaster' => $disaster,
+            'sections' => $sections,
+            'contents' => $contents
         ]);
     }
 

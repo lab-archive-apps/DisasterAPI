@@ -1,7 +1,7 @@
 {% extends 'layouts/_layout.twig' %}
 
 {% block breadcrumb %}
-    <li><a href="{{ path_for('user_index') }}">ユーザー管理</a></li>
+    <li><a href="{{ path_for('content_index') }}">災害対応コンテンツ管理</a></li>
     <li><a href="#">新規登録</a></li>
 {% endblock %}
 
@@ -12,10 +12,17 @@
 
             <hr>
 
-            <form action="{{ path_for('user_store') }}" method="post">
+            <form action="{{ path_for('content_store') }}" method="post">
                 <div class="card">
                     <div class="card-content">
-
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label" for="content_name">内容ラベル</label>
+                            </div>
+                            <div class="field-body">
+                                <input type="text" name="content[name]" id="content_name" class="input" required>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

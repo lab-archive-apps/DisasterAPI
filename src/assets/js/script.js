@@ -1,14 +1,16 @@
 'use strict';
 
 /* Print Alert if push delete button. */
-const deleteBtn = document.getElementById('delete-btn');
+const deleteBtnGroup = document.querySelectorAll('.delete-btn');
 
-if(!Object.is(deleteBtn, null)){
-    deleteBtn.addEventListener('click', (e) => {
-        if(!window.confirm('本当に削除しますか？')) {
-            e.preventDefault();
-        }
-    });
+for(let deleteBtn of deleteBtnGroup){
+    if(!Object.is(deleteBtn, null)){
+        deleteBtn.addEventListener('click', (e) => {
+            if(!window.confirm('本当に削除しますか？')) {
+                e.preventDefault();
+            }
+        });
+    }
 }
 
 /* Form control function on "lists" */

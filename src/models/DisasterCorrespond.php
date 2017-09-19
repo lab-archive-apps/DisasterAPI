@@ -17,7 +17,7 @@ class DisasterCorrespond extends BaseModel {
         return $this->hasMany('App\Models\File');
     }
 
-    // create メソッド使用時に許可するカラム
+    // enable params when called create method.
     protected $fillable = [
         'disaster_id',
         'name',
