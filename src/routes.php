@@ -134,7 +134,6 @@ $app->group('/contents', function(){
 /* ===== Web API ===== */
 $app->get('/getDisaster', '\App\Controller\JsonController:getDisaster')->setName('get_disaster')->add($corsMw);
 $app->get('/getDisasters', '\App\Controller\JsonController:getDisasters')->setName('get_disasters')->add($corsMw);
-$app->get('/getDisasterCoordinates', '\App\Controller\JsonController:getDisasterCoordinates')->setName('get_disaster_coordinates')->add($corsMw);
 $app->get('/getSections', '\App\Controller\JsonController:getSections')->setName('get_sections')->add($corsMw);
 $app->get('/getPlan', '\App\Controller\JsonController:getPlans')->setName('get_plan')->add($corsMw);
 $app->get('/getPlans', '\App\Controller\JsonController:getPlans')->setName('get_plans')->add($corsMw);

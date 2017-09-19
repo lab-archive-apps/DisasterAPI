@@ -20,8 +20,8 @@ class JsonController extends BaseController {
         // TODO: not use find(), because it if returned "[]", slim3 would call "500 error".
         $disasters = Disaster::query()
             ->where('id', $params->get->disasterId)
-            ->with(['corresponds'])
-            ->get()->toJson();
+            ->with(['corresponds', 'coordinates'])
+            ->first()->toJson();
         return $disasters;
     }
 
@@ -33,15 +33,6 @@ class JsonController extends BaseController {
         $disasters = $query->search();
 
         return $disasters;
-    }
-
-    /* Get Disaster coordinates */
-    public function getDisasterCoordinates(Request $request, Response $response, $args){
-        $params = $request->getAttribute('params');
-        $coordinates = DisasterCoordinate::query()
-            ->where('disaster_id', $params->get->disasterId)
-            ->get()->toJson();
-        return $coordinates;
     }
 
     /* Get disaster correspond sections. */
