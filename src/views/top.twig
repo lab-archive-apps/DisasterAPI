@@ -1,10 +1,28 @@
 {% extends 'layouts/_layout.twig' %}
 
 {% block content %}
-    <div id="main-content" class="notification">
-        <h1 class="title">Hello World!!!</h1>
+    <div id="main-content" class="">
+        <h1 class="title">直近に更新された災害記録</h1>
+        <table class="table is-fullwidth is-striped">
+            <tr>
+                <th>災害名</th>
+                <td>{{ disaster.name }}</td>
+            </tr>
+            <tr>
+                <th>発災日時</th>
+                <td>{{ disaster.date }}</td>
+            </tr>
+            <tr>
+                <th>災害種類</th>
+                <td>{{ disaster.class }}</td>
+            </tr>
+            <tr>
+                <th>規模</th>
+                <td>{{ disaster.scale }}</td>
+            </tr>
+
+        </table>
         <div id="disaster-map"></div>
-        <p>Top Field here.</p>
     </div>
 {% endblock %}
 
@@ -15,16 +33,16 @@
             HITACHI: { lat: 36.572377, lng: 140.641972 },
         };
 
-        var mymap = L.map('disaster-map').setView([ibarakiUniv.HITACHI.lat, ibarakiUniv.HITACHI.lng], 15);
+        var disasterMap = L.map('disaster-map').setView([ibarakiUniv.HITACHI.lat, ibarakiUniv.HITACHI.lng], 15);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
             maxZoom: 17,
             minZoom: 11
-        }).addTo(mymap);
+        }).addTo(disasterMap);
 
 
-        mymap.on('click', function (e){
+        disasterMap.on('click', function (e){
             L.popup()
                 .setLatLng(e.latlng)
                 .setContent("You clicked the map at " + e.latlng.toString())

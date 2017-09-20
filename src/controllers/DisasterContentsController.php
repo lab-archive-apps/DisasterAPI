@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Models\DisasterCorrespondContent as Content;
+use App\Models\DisasterContent as Content;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-/* Disaster Correspond Contents Management Controller */
-class DisasterCorrespondContentsController extends BaseController {
+/* Disaster Contents Management Controller */
+class DisasterContentsController extends BaseController {
 
     public function index(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
@@ -52,9 +52,23 @@ class DisasterCorrespondContentsController extends BaseController {
 
     public function update(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
+        $content = Content::find($args['contentId']);
+        $content->fill(json_decode(json_encode($params->post->content), true));
+
+        if($content->save()){
+            $this->flash->addMessage('notice', '更新が完了しました．');
+            return $response->withRedirect($this->router->pathFor('content_index', [], []));
+        }else{
+            $this->flash->addMessage('error', '更新に失敗しました．');
+            return $response->withRedirect($this->router->pathFor('content_create', [], [
+                'params' => $params,
+            ]));
+        }
     }
 
     public function delete(Request $request, Response $response, $args){
+        var_dump('delete');
+        exit;
         $params = $request->getAttribute('params');
         $content = Content::find($args['contentId']);
 

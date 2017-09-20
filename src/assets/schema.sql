@@ -5,6 +5,9 @@ CREATE TABLE disasters(
   season VARCHAR(50),
   class VARCHAR(50),
   scale VARCHAR(255),
+  latitude DOUBLE,
+  longitude DOUBLE,
+  twitter_id VARCHAR(255),
   created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
 )ENGINE=INNODB;
@@ -78,16 +81,10 @@ CREATE TABLE disaster_coordinates(
   FOREIGN KEY (disaster_id) REFERENCES disasters(id) ON DELETE CASCADE
 )ENGINE=INNODB;
 
-CREATE TABLE disaster_correspond_contents(
+CREATE TABLE disaster_contents(
   id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
   name VARCHAR(128),
-  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
-  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
-)ENGINE=INNODB;
-
-CREATE TABLE disaster_correspond_sections(
-  id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  name VARCHAR(128),
+  type VARCHAR (50),
   created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
 )ENGINE=INNODB;

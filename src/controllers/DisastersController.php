@@ -6,6 +6,7 @@ use App\Models\Disaster;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\DisasterCoordinate;
+use App\Models\DisasterContent as Content;
 
 /* Disaster Management Controller */
 class DisastersController extends BaseController {
@@ -22,7 +23,15 @@ class DisastersController extends BaseController {
     }
 
     public function create(Request $request, Response $response, $args){
-        return $this->view->render($response, '/disasters/cases/create.twig');
+        $params = $request->getAttribute('params');
+        $classes = Content::query()->where('type', 'class')->get(['name']);
+        $scales = Content::query()->where('type', 'scale')->get(['name']);
+
+        return $this->view->render($response, '/disasters/cases/create.twig', [
+            'params' => $params,
+            'classes' => $classes,
+            'scales' => $scales
+        ]);
     }
 
     public function show(Request $request, Response $response, $args){
@@ -37,9 +46,16 @@ class DisastersController extends BaseController {
     public function edit(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
         $disaster = Disaster::find($args['disasterId']);
+        $disaster['coordinates'] = $disaster->coordinates;
+        var_dump($disaster);
+        exit;
+        $classes = Content::query()->where('type', 'class')->get(['name']);
+        $scales = Content::query()->where('type', 'scale')->get(['name']);
         return $this->view->render($response, '/disasters/cases/edit.twig', [
             'params' => $params,
-            'disaster' => $disaster
+            'disaster' => $disaster,
+            'classes' => $classes,
+            'scales' => $scales
         ]);
     }
 

@@ -24,5 +24,7 @@ class Disaster extends BaseModel{
         'season',
         'class',
         'scale',
+        'latitude',
+        'longitude',
     ];
 }

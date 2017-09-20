@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Models\DisasterCoordinate;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\Disaster;
 use App\Models\PreventionPlan;
 use App\Models\BaseList;
 use App\Search\DisasterSearch;
-use App\Models\DisasterCorrespondSection as Section;
+use App\Models\DisasterContent as Content;
 
 class JsonController extends BaseController {
 
@@ -38,7 +37,9 @@ class JsonController extends BaseController {
     /* Get disaster correspond sections. */
     public function getSections(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $sections = Section::query()->get(['id', 'name'])->toJson();
+        $sections = Content::query()
+            ->where('type', 'section')
+            ->get(['id', 'name'])->toJson();
         return $sections;
     }
 

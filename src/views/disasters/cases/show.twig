@@ -13,9 +13,58 @@
 
             <div class="card">
                 <div class="card-content">
-
+                    <table class="table is-fullwidth is-striped">
+                        <tr>
+                            <th>災害名</th>
+                            <td>{{ disaster.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>発災日時</th>
+                            <td>{{ disaster.date }}</td>
+                        </tr>
+                        <tr>
+                            <th>季節</th>
+                            <td>{{ disaster.season }}</td>
+                        </tr>
+                        <tr>
+                            <th>種類</th>
+                            <td>{{ disaster.class }}</td>
+                        </tr>
+                        <tr>
+                            <th>規模</th>
+                            <td>{{ disaster.scale }}</td>
+                        </tr>
+                    </table>
+                    <div id="disaster-map"></div>
                 </div>
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script>
+        var url = location.protocol + '//' + location.host;
+        var ibarakiUniv = {
+            HITACHI: { lat: 36.572377, lng: 140.641972 },
+        };
+        /* === Leaflet Config === */
+        var icon = L.icon({
+            iconUrl:      url + '/images/marker-icon.png',
+            iconSize:     [25, 35],
+            iconAnchor:   [15, 30],
+            shadowUrl:    url + '/images/marker-shadow.png',
+            shadowSize: [45, 50],
+            shadowAnchor: [17, 45]
+        });
+        // create Open Street Map
+        var disasterMap = L.map('disaster-map').setView([ibarakiUniv.HITACHI.lat, ibarakiUniv.HITACHI.lng], 11);
+        var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 17,
+            minZoom: 11
+        });
+        tileLayer.addTo(disasterMap);
+    </script>
 {% endblock %}

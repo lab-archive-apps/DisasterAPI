@@ -39,18 +39,17 @@
                             </div>
                             <div class="field-body">
                                 <div class="control">
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="disaster[season][]" value="春"> 春
-                                    </label>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="disaster[season][]" value="夏"> 夏
-                                    </label>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="disaster[season][]" value="秋"> 秋
-                                    </label>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="disaster[season][]" value="冬"> 冬
-                                    </label>
+                                    {% set seasons = ['春', '夏', '秋', '冬'] %}
+                                    {% for season in seasons %}
+                                        {% set checked = '' %}
+                                        {% if season in disaster.season %}
+                                            {% set checked = 'checked' %}
+                                        {% endif %}
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="disaster[season][]" value="{{ season }}" {{ checked }}> {{ season }}
+                                        </label>
+                                    {% endfor %}
+
                                 </div>
                             </div>
                         </div>
@@ -62,10 +61,13 @@
                             <div class="field-body">
                                 <div class="select">
                                     <select id="disaster_class" name="disaster[class]" required>
-                                        <option disabled selected></option>
-                                        <option>地震</option>
-                                        <option>豪雨</option>
-                                        <option>噴火</option>
+                                        {% for class in classes %}
+                                            {% set selected = '' %}
+                                            {% if class == disaster.class %}
+                                                {% set selected = 'selected' %}
+                                            {% endif %}
+                                            <option {{ selected }}>{{ class.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -78,14 +80,29 @@
                             <div class="field-body">
                                 <div class="select">
                                     <select id="disaster_scale" name="disaster[scale]" required>
-                                        <option disabled selected></option>
-                                        <option>大規模</option>
-                                        <option>中規模</option>
-                                        <option>小規模</option>
+                                        {% for scale in scales %}
+                                            {% set selected = '' %}
+                                            {% if scale == disaster.scale %}
+                                                {% set selected = 'selected' %}
+                                            {% endif %}
+                                            <option {{ selected }}>{{ scale.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="field" id="coordinates">
+                            <label class="label" for="disaster_coordinates">被害範囲の登録</label>
+                            <p>地図上をクリックすることで被害エリアを登録することができます．</p>
+                            <button type="reset" class="button" id="map-reset">マップリセット</button>
+                            <label class="checkbox">
+                                <input type="checkbox" id="onMarker"/> 発生源をセットする
+                            </label>
+                            <div id="disaster-map"></div>
+                        </div>
+
 
                         <div class="field is-grouped is-grouped-right">
                             <div class="control">
@@ -97,4 +114,33 @@
             </form>
         </div>
     </section>
+{% endblock %}
+
+
+{% block js %}
+    <script type="text/javascript" src="{{ public_path }}/js/app.js"></script>
+    <script>
+        var tes = "{{ disaster.coordinates }}";
+        console.warn(tes);
+        var ibarakiUniv = {
+            HITACHI: { lat: 36.572377, lng: 140.641972 },
+        };
+
+        var mymap = L.map('disaster-map').setView([ibarakiUniv.HITACHI.lat, ibarakiUniv.HITACHI.lng], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 17,
+            minZoom: 11
+        }).addTo(mymap);
+
+
+        mymap.on('click', function (e){
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(mymap);
+            console.log(e.latlng.toString());
+        });
+    </script>
 {% endblock %}
