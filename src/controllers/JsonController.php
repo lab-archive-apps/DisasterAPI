@@ -5,7 +5,7 @@ namespace App\Controller;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\Disaster;
-use App\Models\PreventionPlan;
+//use App\Models\PreventionPlan;
 use App\Models\BaseList;
 use App\Search\DisasterSearch;
 use App\Models\DisasterContent as Content;
@@ -44,20 +44,20 @@ class JsonController extends BaseController {
     }
 
     /* Get prevention plan */
-    public function getPlan(Request $request, Response $response, $args){
-        $params = $request->getAttribute('params');
-
-        $plans = PreventionPlan::query()->get()->toJson();
-        return $plans;
-    }
-
-    /* Get plans name. */
-    public function getPlans(Request $request, Response $response, $args){
-        $params = $request->getAttribute('params');
-
-        $plans = PreventionPlan::query()->get()->toJson();
-        return $plans;
-    }
+//    public function getPlan(Request $request, Response $response, $args){
+//        $params = $request->getAttribute('params');
+//
+//        $plans = PreventionPlan::query()->get()->toJson();
+//        return $plans;
+//    }
+//
+//    /* Get plans name. */
+//    public function getPlans(Request $request, Response $response, $args){
+//        $params = $request->getAttribute('params');
+//
+//        $plans = PreventionPlan::query()->get()->toJson();
+//        return $plans;
+//    }
 
     /* Get list with messages. */
     public function getList(Request $request, Response $response, $args){

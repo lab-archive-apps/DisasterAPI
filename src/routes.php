@@ -36,26 +36,26 @@ $app->get('/top', '\App\Controller\TopController:index')
 
 /* ===== Disaster System ===== */
 // Disaster Management
-$app->group('/disasters', function(){
+$app->group('/disasters', function () {
     // Disaster Management System
     $this->get('', '\App\Controller\DisastersController:index')->setName('disaster_index');
     // Select Disaster's list
     $this->get('/selects', '\App\Controller\DisastersController:select')->setName('disaster_select');
     $this->get('/create', '\App\Controller\DisastersController:create')->setName('disaster_create');
     $this->post('', '\App\Controller\DisastersController:store')->setName('disaster_store');
-    $this->group('/{disasterId}', function(){
+    $this->group('/{disasterId}', function () {
         $this->get('', '\App\Controller\DisastersController:show')->setName('disaster_show');
         $this->get('/edit', '\App\Controller\DisastersController:edit')->setName('disaster_edit');
         $this->map(['PATCH', 'PUT'], '', '\App\Controller\DisastersController:update')->setName('disaster_update');
         $this->delete('', '\App\Controller\DisastersController:delete')->setName('disaster_delete');
 
         // Disaster DisasterCorrespond Management System
-        $this->group('/corresponds', function(){
+        $this->group('/corresponds', function () {
             $this->get('', '\App\Controller\DisasterCorrespondsController:index')->setName('correspond_index');
             $this->get('/create', '\App\Controller\DisasterCorrespondsController:create')->setName('correspond_create');
             $this->post('', '\App\Controller\DisasterCorrespondsController:store')->setName('correspond_store');
 
-            $this->group('/{correspondId}', function() {
+            $this->group('/{correspondId}', function () {
                 $this->get('', '\App\Controller\DisasterCorrespondsController:show')->setName('correspond_show');
                 $this->get('/edit', '\App\Controller\DisasterCorrespondsController:edit')->setName('correspond_edit');
                 $this->map(['PATCH', 'PUT'], '', '\App\Controller\DisasterCorrespondsController:update')->setName('correspond_update');
@@ -65,25 +65,12 @@ $app->group('/disasters', function(){
     });
 })->add($authMw);
 
-// Disaster Prevention PreventionPlan Management System
-$app->group('/plans', function(){
-    $this->get('', '\App\Controller\PreventionPlansController:index')->setName('plan_index');
-    $this->get('/create', '\App\Controller\PreventionPlansController:create')->setName('plan_create');
-    $this->post('', '\App\Controller\PreventionPlansController:store')->setName('plan_store');
-    $this->group('/{planId}', function(){
-        $this->get('', '\App\Controller\PreventionPlansController:show')->setName('plan_show');
-        $this->get('/edit', '\App\Controller\PreventionPlansController:edit')->setName('plan_edit');
-        $this->map(['PATCH', 'PUT'], '', '\App\Controller\PreventionPlansController:update')->setName('plan_update');
-        $this->delete('', '\App\Controller\PreventionPlansController:delete')->setName('plan_delete');
-    });
-})->add($authMw);
-
 // TodoList Management System
-$app->group('/lists', function(){
+$app->group('/lists', function () {
     $this->get('', '\App\Controller\TodoListsController:index')->setName('list_index');
     $this->get('/create', '\App\Controller\TodoListsController:create')->setName('list_create');
     $this->post('', '\App\Controller\TodoListsController:store')->setName('list_store');
-    $this->group('/{listId}', function(){
+    $this->group('/{listId}', function () {
         $this->get('', '\App\Controller\TodoListsController:show')->setName('list_show');
         $this->get('/edit', '\App\Controller\TodoListsController:edit')->setName('list_edit');
         $this->map(['PATCH', 'PUT'], '', '\App\Controller\TodoListsController:update')->setName('list_update');
@@ -94,11 +81,11 @@ $app->group('/lists', function(){
 
 /* ===== Settings ===== */
 // User Management System
-$app->group('/users', function(){
+$app->group('/users', function () {
     $this->get('', '\App\Controller\UsersController:index')->setName('user_index');
     $this->get('/create', '\App\Controller\UsersController:create')->setName('user_create');
     $this->post('', '\App\Controller\UsersController:store')->setName('user_store');
-    $this->group('/{userId}', function(){
+    $this->group('/{userId}', function () {
         $this->get('', '\App\Controller\UsersController:show')->setName('user_show');
         $this->get('/edit', '\App\Controller\UsersController:edit')->setName('user_edit');
         $this->map(['PATCH', 'PUT'], '', '\App\Controller\UsersController:update')->setName('user_update');
@@ -107,11 +94,11 @@ $app->group('/users', function(){
 })->add($authMw);
 
 // Correspond Content Management System
-$app->group('/contents', function(){
+$app->group('/contents', function () {
     $this->get('', '\App\Controller\DisasterContentsController:index')->setName('content_index');
     $this->get('/create', '\App\Controller\DisasterContentsController:create')->setName('content_create');
     $this->post('', '\App\Controller\DisasterContentsController:store')->setName('content_store');
-    $this->group('/{contentId}', function(){
+    $this->group('/{contentId}', function () {
         $this->get('/edit', '\App\Controller\DisasterContentsController:edit')->setName('content_edit');
         $this->map(['PATCH', 'PUT'], '', '\App\Controller\DisasterContentsController:update')->setName('content_update');
         $this->delete('', '\App\Controller\DisasterContentsController:delete')->setName('content_delete');
@@ -120,6 +107,20 @@ $app->group('/contents', function(){
 /* !===== Settings =====! */
 
 /* ===== Web API ===== */
+$app->group('/api', function () {
+    // Disaster Management System
+    $this->get('/getDisaster', '\App\Controller\API\DisastersController:getDisaster')->setName('get_disaster');
+    $this->get('/getDisasters', '\App\Controller\API\DisastersController:getDisasters')->setName('get_disasters');
+    $this->get('/postDisaster', '\App\Controller\API\DisastersController:postDisaster')->setName('post_disaster');
+    $this->get('/updateDisaster', '\App\Controller\API\DisastersController:updateDisaster')->setName('update_disaster');
+    $this->get('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
+    // Disaster Response Record Management System
+    // Prevention Plan Management System
+    // User Management System
+    // Area Management System
+    // Social Media Management System
+})->add($corsMw);
+
 $app->get('/getDisaster', '\App\Controller\JsonController:getDisaster')->setName('get_disaster')->add($corsMw);
 $app->get('/getDisasters', '\App\Controller\JsonController:getDisasters')->setName('get_disasters')->add($corsMw);
 $app->get('/getSections', '\App\Controller\JsonController:getSections')->setName('get_sections')->add($corsMw);
