@@ -14,9 +14,9 @@ class AuthController extends BaseController{
     public function getLogin(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
 
-        $params['get'] = isset($params->get) ? $params->get : array();
-        $params->get['errors'] = isset($params->get->errors) ? $params->get->errors : null;
-        $params->get['user_id'] = isset($params->get->user_id) ? $params->get->user_id : null;
+//        $params['get'] = isset($params->get) ? $params->get : array();
+//        $params->get['errors'] = isset($params->get->errors) ? $params->get->errors : null;
+//        $params->get['user_id'] = isset($params->get->user_id) ? $params->get->user_id : null;
 
         return $this->view->render($response, '/auth/login.twig', [
             'errors' => $params->get->errors,
