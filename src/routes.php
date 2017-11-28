@@ -112,8 +112,10 @@ $app->group('/api', function () {
     $this->get('/getDisaster', '\App\Controller\API\DisastersController:getDisaster')->setName('get_disaster');
     $this->get('/getDisasters', '\App\Controller\API\DisastersController:getDisasters')->setName('get_disasters');
     $this->post('/postDisaster', '\App\Controller\API\DisastersController:postDisaster')->setName('post_disaster');
-    $this->map(['PATCH', 'PUT'], '/updateDisaster', '\App\Controller\API\DisastersController:updateDisaster')->setName('update_disaster');
-    $this->delete('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
+    // $this->map(['PATCH', 'PUT'], '/updateDisaster', '\App\Controller\API\DisastersController:updateDisaster')->setName('update_disaster');
+    $this->post('/updateDisaster', '\App\Controller\API\DisastersController:updateDisaster')->setName('update_disaster');
+    // $this->delete('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
+    $this->post('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
     // Disaster Response Record Management System
     // Prevention Plan Management System
     // User Management System

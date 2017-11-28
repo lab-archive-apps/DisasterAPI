@@ -9,42 +9,61 @@ use App\Models\Disaster;
 use App\Search\DisasterSearch;
 use App\Models\DisasterContent as Content;
 
-class DisastersController extends BaseController {
+class DisastersController extends BaseController{
+    private $res = [
+        'result' => 'failed',
+        'state' => false,
+        'error' => ''
+    ];
 
-    /* Get disasters name, season, class */
-    public function getDisasters(Request $request, Response $response, $args){
+
+    /* Get disasters */
+    public function getDisasters(Request $request, Response $response, $args)
+    {
         $params = $request->getAttribute('params');
 
         $query = new DisasterSearch(Disaster::query(), $params->get);
         $disasters = $query->search();
 
-        return $disasters;
+        return $response->withJson($disasters);
     }
 
     /* Get disaster with corresponds */
-    public function getDisaster(Request $request, Response $response, $args){
+    public function getDisaster(Request $request, Response $response, $args)
+    {
         $params = $request->getAttribute('params');
 
         // TODO: not use find(), because if $disasters returned "[]", slim3 would call "500 error".
         $disasters = Disaster::query()
-            ->where('id', $params->get->disasterId)
-            ->with(['corresponds', 'coordinates'])
-            ->first()->toJson();
-        return $disasters;
+            ->where('id', $params->get->disaster_id)
+            //->with(['corresponds', 'coordinates'])
+            ->first();
+        return $response->withJson($disasters);
     }
 
     /* Post disaster */
-    public function postDisaster(Request $request, Response $response, $args){
+    public function postDisaster(Request $request, Response $response, $args)
+    {
         $params = $request->getAttribute('params');
-//
-//        $disaster = new Disaster();
-//        $disaster->fill(json_decode(json_encode($params->post->disaster), true));
 
-        $response = ['result' => 'failed', 'date' => $params->post->date];
+        $disaster = new Disaster();
+        $disaster->fill([
+            'date' => $params->post->date,
+            'name' => $params->post->name,
+            'season' => $params->post->season,
+            'area' => $params->post->area,
+            'prefecture' => $params->post->prefecture,
+            'city' => $params->post->city,
+            'classification' => $params->post->classification,
+            'scale' => $params->post->scale,
+        ]);
 
-//        if($disaster->save()){
-//            $response['result'] = 'success';
-//        }
+        if ($disaster->save()) {
+            $this->res['result'] = 'success';
+            $this->res['state'] = true;
+        }else{
+            $this->res['error'] = '登録に失敗しました．';
+        }
 //            $coordinates = [];
 //            foreach($params->post->disaster->coordinates as $key => $value){
 //                $coordinate = new DisasterCoordinate();
@@ -52,32 +71,45 @@ class DisastersController extends BaseController {
 //                $coordinates[] = $coordinate;
 //            }
 //            $disaster->coordinates()->saveMany($coordinates);
-
-        return json_encode(compact('response'));
+        return $response->withJson($this->res);
     }
 
     /* Update disaster */
     public function updateDisaster(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $disaster = Disaster::find($args['disasterId']);
+        $disaster = Disaster::find($params->post->disaster_id);
+        $data = [
+            'date' => $params->post->date,
+            'name' => $params->post->name,
+            'season' => $params->post->season,
+            'area' => $params->post->area,
+            'prefecture' => $params->post->prefecture,
+            'city' => $params->post->city,
+            'classification' => $params->post->classification,
+            'scale' => $params->post->scale,
+        ];
 
-        $response = ['result' => 'failed'];
+        if ($disaster->update($data)){
+            $this->res['result'] = 'success';
+            $this->res['state'] = true;
+        }else {
+            $this->res['error'] = '更新に失敗しました．';
+        }
 
-        if($disaster->update(json_decode(json_encode($params->post->disaster), true)))
-            $response['result'] = 'success';
-
-        return json_encode(compact('response'));
+        return $response->withJson($this->res);
     }
 
     /* Delete disaster */
     public function deleteDisaster(Request $request, Response $response, $args){
-        $disaster = Disaster::find($args['disasterId']);
+        $params = $request->getAttribute('params');
+        $disaster = Disaster::find($params->post->disaster_id);
 
-        $response = ['result' => 'failed'];
-
-        if($disaster->delete())
-            $response['result'] = 'success';
-
-        return json_encode(compact('response'));
+        if ($disaster->delete()) {
+            $this->res['result'] = 'success';
+            $this->res['state'] = true;
+        }else {
+            $this->res['error'] = '削除に失敗しました．';
+        }
+        return $response->withJson($this->res);
     }
 }
