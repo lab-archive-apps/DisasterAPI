@@ -65,20 +65,6 @@ $app->group('/disasters', function () {
     });
 })->add($authMw);
 
-// TodoList Management System
-$app->group('/lists', function () {
-    $this->get('', '\App\Controller\TodoListsController:index')->setName('list_index');
-    $this->get('/create', '\App\Controller\TodoListsController:create')->setName('list_create');
-    $this->post('', '\App\Controller\TodoListsController:store')->setName('list_store');
-    $this->group('/{listId}', function () {
-        $this->get('', '\App\Controller\TodoListsController:show')->setName('list_show');
-        $this->get('/edit', '\App\Controller\TodoListsController:edit')->setName('list_edit');
-        $this->map(['PATCH', 'PUT'], '', '\App\Controller\TodoListsController:update')->setName('list_update');
-        $this->delete('', '\App\Controller\TodoListsController:delete')->setName('list_delete');
-    });
-})->add($authMw);
-/* !===== Disaster System =====! */
-
 /* ===== Settings ===== */
 // User Management System
 $app->group('/users', function () {
@@ -93,17 +79,6 @@ $app->group('/users', function () {
     });
 })->add($authMw);
 
-// Correspond Content Management System
-$app->group('/contents', function () {
-    $this->get('', '\App\Controller\DisasterContentsController:index')->setName('content_index');
-    $this->get('/create', '\App\Controller\DisasterContentsController:create')->setName('content_create');
-    $this->post('', '\App\Controller\DisasterContentsController:store')->setName('content_store');
-    $this->group('/{contentId}', function () {
-        $this->get('/edit', '\App\Controller\DisasterContentsController:edit')->setName('content_edit');
-        $this->map(['PATCH', 'PUT'], '', '\App\Controller\DisasterContentsController:update')->setName('content_update');
-        $this->delete('', '\App\Controller\DisasterContentsController:delete')->setName('content_delete');
-    });
-});
 /* !===== Settings =====! */
 
 /* ===== Web API ===== */
@@ -117,18 +92,18 @@ $app->group('/api', function () {
     // $this->delete('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
     $this->post('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
     // Disaster Response Record Management System
+    $this->get('/getResponseRecord', '\App\Controller\API\DisastersController:getResponseRecord')->setName('get_response_record');
+    $this->get('/getResponseRecords', '\App\Controller\API\DisastersController:getResponseRecords')->setName('get_response_records');
+    $this->post('/postResponseRecord', '\App\Controller\API\DisastersController:postResponseRecord')->setName('post_response_record');
+    $this->post('/updateResponseRecord', '\App\Controller\API\DisastersController:updateResponseRecord')->setName('update_response_record');
+    $this->post('/deleteResponseRecord', '\App\Controller\API\DisastersController:deleteResponseRecord')->setName('delete_response_record');
     // Prevention Plan Management System
+    $this->get('/getPreventionPlan', '\App\Controller\API\DisastersController:getPreventionPlan')->setName('get_prevention_plan');
+    $this->get('/getPreventionPlans', '\App\Controller\API\DisastersController:getPreventionPlans')->setName('get_prevention_plans');
+    $this->post('/postPreventionPlan', '\App\Controller\API\DisastersController:postPreventionPlan')->setName('post_prevention_plan');
+    $this->post('/updatePreventionPlan', '\App\Controller\API\DisastersController:updatePreventionPlan')->setName('update_prevention_plan');
+    $this->post('/deletePreventionPlan', '\App\Controller\API\DisastersController:deletePreventionPlan')->setName('delete_prevention_plan');
     // User Management System
     // Area Management System
     // Social Media Management System
 })->add($corsMw);
-
-$app->get('/getDisaster', '\App\Controller\JsonController:getDisaster')->setName('get_disaster')->add($corsMw);
-$app->get('/getDisasters', '\App\Controller\JsonController:getDisasters')->setName('get_disasters')->add($corsMw);
-$app->get('/getSections', '\App\Controller\JsonController:getSections')->setName('get_sections')->add($corsMw);
-$app->get('/getPlan', '\App\Controller\JsonController:getPlans')->setName('get_plan')->add($corsMw);
-$app->get('/getPlans', '\App\Controller\JsonController:getPlans')->setName('get_plans')->add($corsMw);
-$app->get('/getList', '\App\Controller\JsonController:getLists')->setName('get_list')->add($corsMw);
-$app->get('/getLists', '\App\Controller\JsonController:getLists')->setName('get_lists')->add($corsMw);
-$app->get('/getUsers', '\App\Controller\JsonController:getUsers')->setName('get_users')->add($corsMw);
-/* !===== Web API =====! */
