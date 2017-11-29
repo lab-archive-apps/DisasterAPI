@@ -39,12 +39,15 @@ class PreventionPlansController extends BaseController{
     }
 
     /* Post preventionPlan */
-    public function postPreventionPlan(Request $request, Response $response, $args)
-    {
+    public function postPreventionPlan(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
 
         $preventionPlan = new PreventionPlan();
-        // $preventionPlan->fill([]);
+        $preventionPlan->fill([
+            'name' => $params->post->name,
+            'location' => $params->post->location,
+            'classification' => $params->post->classification
+        ]);
 
         if ($preventionPlan->save()) {
             $this->res['result'] = 'success';

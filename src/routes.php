@@ -106,4 +106,8 @@ $app->group('/api', function () {
     // User Management System
     // Area Management System
     // Social Media Management System
+    // File System
+    $this->post('/postFile', '\App\Controller\API\FilesController:postFile')->setName('post_file');
+    $this->post('/postTempFile', '\App\Controller\API\FilesController:postTempFile')->setName('post_temp_file');
+    $this->post('/deleteFile', '\App\Controller\API\FilesController:deleteFile')->setName('delete_file');
 })->add($corsMw);

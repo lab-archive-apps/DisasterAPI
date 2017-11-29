@@ -10,10 +10,12 @@ class PreventionPlan extends BaseModel{
     protected $table = 'prevention_plans'; // Set a Table Name
 
     public function uploads(){
-        return $this->hasMany('App\Models\File');
+        return $this->morphMany('App\Models\File', 'resource');
     }
+
     // enable params when called create method.
     protected $fillable = [
+        'name',
         'location',
         'classification',
     ];

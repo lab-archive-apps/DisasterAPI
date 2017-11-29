@@ -7,6 +7,6 @@ class PreventionPlanSearch extends BaseSearch {
     public function search() {
         return $this->query
             ->orderBy('created_at', 'desc')
-            ->get(['id', 'location', 'classification']);
+            ->get(['id', 'name', 'location']);
     }
 }
