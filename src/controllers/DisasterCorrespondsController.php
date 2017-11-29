@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Models\Disaster;
-use App\Models\DisasterCorrespond;
-use App\Models\DisasterContent as Content;
+use App\Models\ResponseRecord;
+use App\Models\Contents as Content;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -62,7 +62,7 @@ class DisasterCorrespondsController extends BaseController {
         $disaster = Disaster::find($args['disasterId']);
 
         $params->post->correspond->contents = implode(',', $params->post->correspond->contents);
-        $correspond = new DisasterCorrespond(json_decode(json_encode($params->post->correspond), true));
+        $correspond = new ResponseRecord(json_decode(json_encode($params->post->correspond), true));
 
         if($disaster->corresponds()->save($correspond)){
             $this->flash->addMessage('notice', '更新が完了しました．');

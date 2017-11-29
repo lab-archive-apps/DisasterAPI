@@ -6,6 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
 use App\Search\PreventionPlanSearch;
+use App\Models\PreventionPlan;
 
 class PreventionPlansController extends BaseController{
     private $res = [
@@ -13,7 +14,6 @@ class PreventionPlansController extends BaseController{
         'state' => false,
         'error' => ''
     ];
-
 
     /* Get preventionPlans */
     public function getPreventionPlans(Request $request, Response $response, $args)
@@ -33,7 +33,7 @@ class PreventionPlansController extends BaseController{
 
         // TODO: not use find(), because if $preventionPlans returned "[]", slim3 would call "500 error".
         $preventionPlans = PreventionPlan::query()
-            ->where('id', $params->get->preventionPlan_id)
+            ->where('id', $params->get->plan_id)
             ->first();
         return $response->withJson($preventionPlans);
     }
@@ -59,7 +59,7 @@ class PreventionPlansController extends BaseController{
     /* Update preventionPlan */
     public function updatePreventionPlan(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $preventionPlan = PreventionPlan::find($params->post->preventionPlan_id);
+        $preventionPlan = PreventionPlan::find($params->post->plan_id);
         $data = [];
 
         if ($preventionPlan->update($data)){
@@ -75,7 +75,7 @@ class PreventionPlansController extends BaseController{
     /* Delete preventionPlan */
     public function deletePreventionPlan(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $preventionPlan = PreventionPlan::find($params->post->preventionPlan_id);
+        $preventionPlan = PreventionPlan::find($params->post->plan_id);
 
         if ($preventionPlan->delete()) {
             $this->res['result'] = 'success';

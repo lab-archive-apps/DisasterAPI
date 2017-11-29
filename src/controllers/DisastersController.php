@@ -6,7 +6,7 @@ use App\Models\Disaster;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\DisasterCoordinate;
-use App\Models\DisasterContent as Content;
+use App\Models\Contents as Content;
 
 /* Disaster Management Controller */
 class DisastersController extends BaseController {

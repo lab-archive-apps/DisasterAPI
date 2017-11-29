@@ -10,7 +10,7 @@ class Disaster extends BaseModel{
     protected $table = 'disasters'; // Set a Table Name
 
     public function corresponds(){
-        return $this->hasMany('App\Models\DisasterCorrespond', 'disaster_id');
+        return $this->hasMany('App\Models\ResponseRecord', 'disaster_id');
     }
 
     public function coordinates(){

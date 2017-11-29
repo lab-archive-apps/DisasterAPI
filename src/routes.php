@@ -49,7 +49,7 @@ $app->group('/disasters', function () {
         $this->map(['PATCH', 'PUT'], '', '\App\Controller\DisastersController:update')->setName('disaster_update');
         $this->delete('', '\App\Controller\DisastersController:delete')->setName('disaster_delete');
 
-        // Disaster DisasterCorrespond Management System
+        // Disaster ResponseRecord Management System
         $this->group('/corresponds', function () {
             $this->get('', '\App\Controller\DisasterCorrespondsController:index')->setName('correspond_index');
             $this->get('/create', '\App\Controller\DisasterCorrespondsController:create')->setName('correspond_create');
@@ -92,17 +92,17 @@ $app->group('/api', function () {
     // $this->delete('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
     $this->post('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
     // Disaster Response Record Management System
-    $this->get('/getResponseRecord', '\App\Controller\API\DisastersController:getResponseRecord')->setName('get_response_record');
-    $this->get('/getResponseRecords', '\App\Controller\API\DisastersController:getResponseRecords')->setName('get_response_records');
-    $this->post('/postResponseRecord', '\App\Controller\API\DisastersController:postResponseRecord')->setName('post_response_record');
-    $this->post('/updateResponseRecord', '\App\Controller\API\DisastersController:updateResponseRecord')->setName('update_response_record');
-    $this->post('/deleteResponseRecord', '\App\Controller\API\DisastersController:deleteResponseRecord')->setName('delete_response_record');
+    $this->get('/getResponseRecord', '\App\Controller\API\ResponseRecordsController:getResponseRecord')->setName('get_response_record');
+    $this->get('/getResponseRecords', '\App\Controller\API\ResponseRecordsController:getResponseRecords')->setName('get_response_records');
+    $this->post('/postResponseRecord', '\App\Controller\API\ResponseRecordsController:postResponseRecord')->setName('post_response_record');
+    $this->post('/updateResponseRecord', '\App\Controller\API\ResponseRecordsController:updateResponseRecord')->setName('update_response_record');
+    $this->post('/deleteResponseRecord', '\App\Controller\API\ResponseRecordsController:deleteResponseRecord')->setName('delete_response_record');
     // Prevention Plan Management System
-    $this->get('/getPreventionPlan', '\App\Controller\API\DisastersController:getPreventionPlan')->setName('get_prevention_plan');
-    $this->get('/getPreventionPlans', '\App\Controller\API\DisastersController:getPreventionPlans')->setName('get_prevention_plans');
-    $this->post('/postPreventionPlan', '\App\Controller\API\DisastersController:postPreventionPlan')->setName('post_prevention_plan');
-    $this->post('/updatePreventionPlan', '\App\Controller\API\DisastersController:updatePreventionPlan')->setName('update_prevention_plan');
-    $this->post('/deletePreventionPlan', '\App\Controller\API\DisastersController:deletePreventionPlan')->setName('delete_prevention_plan');
+    $this->get('/getPreventionPlan', '\App\Controller\API\PreventionPlansController:getPreventionPlan')->setName('get_prevention_plan');
+    $this->get('/getPreventionPlans', '\App\Controller\API\PreventionPlansController:getPreventionPlans')->setName('get_prevention_plans');
+    $this->post('/postPreventionPlan', '\App\Controller\API\PreventionPlansController:postPreventionPlan')->setName('post_prevention_plan');
+    $this->post('/updatePreventionPlan', '\App\Controller\API\PreventionPlansController:updatePreventionPlan')->setName('update_prevention_plan');
+    $this->post('/deletePreventionPlan', '\App\Controller\API\PreventionPlansController:deletePreventionPlan')->setName('delete_prevention_plan');
     // User Management System
     // Area Management System
     // Social Media Management System

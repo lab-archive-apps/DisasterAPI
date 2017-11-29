@@ -33,7 +33,8 @@
             "App\\Middleware\\": "src/middleware/",
             "App\\Config\\": "src/config/",
             "App\\Auth\\": "src/auth/",
-            "App\\Search\\": "src/searches/"
+            "App\\Search\\": "src/searches/",
+            "App\\Controller\\API\\": "src/controllers/api"
         }
     },
 	"scripts": {

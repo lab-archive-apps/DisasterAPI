@@ -2,12 +2,12 @@
 namespace App\Models;
 
 /**
- * Disaster Correspond Database Model
- * Class DisasterCorrespond
+ * ResponseRecord Database Model
+ * Class ResponseRecord
  * @package App\Models
  */
-class DisasterCorrespond extends BaseModel {
-    protected $table = 'disaster_corresponds'; // Set a Table Name
+class ResponseRecord extends BaseModel {
+    protected $table = 'response_records'; // Set a Table Name
 
     public function disaster(){
         return $this->belongsTo('App\Models\Disaster');

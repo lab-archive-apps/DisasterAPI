@@ -6,6 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
 use App\Models\Disaster;
+use App\Models\ResponseRecord;
 use App\Search\ResponseRecordSearch;
 
 class ResponseRecordsController extends BaseController{
@@ -14,7 +15,6 @@ class ResponseRecordsController extends BaseController{
         'state' => false,
         'error' => ''
     ];
-
 
     /* Get responseRecords */
     public function getResponseRecords(Request $request, Response $response, $args)
@@ -34,7 +34,7 @@ class ResponseRecordsController extends BaseController{
 
         // TODO: not use find(), because if $responseRecords returned "[]", slim3 would call "500 error".
         $responseRecords = ResponseRecord::query()
-            ->where('id', $params->get->responseRecord_id)
+            ->where('id', $params->get->record_id)
             //->with(['corresponds', 'coordinates'])
             ->first();
         return $response->withJson($responseRecords);
@@ -61,7 +61,7 @@ class ResponseRecordsController extends BaseController{
     /* Update responseRecord */
     public function updateResponseRecord(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $responseRecord = ResponseRecord::find($params->post->responseRecord_id);
+        $responseRecord = ResponseRecord::find($params->post->record_id);
         $data = [];
 
         if ($responseRecord->update($data)){
@@ -77,7 +77,7 @@ class ResponseRecordsController extends BaseController{
     /* Delete responseRecord */
     public function deleteResponseRecord(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $responseRecord = ResponseRecord::find($params->post->responseRecord_id);
+        $responseRecord = ResponseRecord::find($params->post->record_id);
 
         if ($responseRecord->delete()) {
             $this->res['result'] = 'success';
