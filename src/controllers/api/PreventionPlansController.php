@@ -27,8 +27,7 @@ class PreventionPlansController extends BaseController{
     }
 
     /* Get preventionPlan with corresponds */
-    public function getPreventionPlan(Request $request, Response $response, $args)
-    {
+    public function getPreventionPlan(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
 
         // TODO: not use find(), because if $preventionPlans returned "[]", slim3 would call "500 error".
@@ -53,7 +52,7 @@ class PreventionPlansController extends BaseController{
             $this->res['result'] = 'success';
             $this->res['state'] = true;
         }else{
-            $this->res['error'] = '登録に失敗しました．';
+            $this->res['error'] = 'Failed Register.';
         }
 
         return $response->withJson($this->res);

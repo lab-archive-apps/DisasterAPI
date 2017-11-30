@@ -18,7 +18,7 @@ final class PathMiddleware extends SingletonCore{
         $params['post'] = $req->getParsedBody();                // $_POST
         $params['files'] = $req->getUploadedFiles();            // $_FILES
         $params['session'] = Session::getInstance()->getAll();  // $_SESSION
-        // $params['path'] = $this->setting['renderer'];        // Path
+        $params['path'] = $this->setting['renderer'];        // Path
 
         // Change Array to Object
         $req = $req->withAttribute('params', json_decode(json_encode($params)));
