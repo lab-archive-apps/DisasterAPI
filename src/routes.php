@@ -110,4 +110,5 @@ $app->group('/api', function () {
     $this->post('/postFile', '\App\Controller\API\FilesController:postFile')->setName('post_file');
     $this->post('/postTempFile', '\App\Controller\API\FilesController:postTempFile')->setName('post_temp_file');
     $this->post('/deleteFile', '\App\Controller\API\FilesController:deleteFile')->setName('delete_file');
+    $this->post('/deleteTempFile', '\App\Controller\API\FilesController:deleteTempFile')->setName('delete_file');
 })->add($corsMw);

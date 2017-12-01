@@ -1,4 +1,4 @@
-# directoryIndex public
+# DirectoryIndex public
 
 # 送られてきたOriginを許可オリジンとしてオウム返しする
 #RewriteCond %{HTTP:Origin} (.+)
@@ -10,6 +10,6 @@
 #RewriteRule . - [E=CORS_ORIGIN:%1]
 #Header set Access-Control-Allow-Origin %{CORS_ORIGIN}e env=CORS_ORIGIN
 
-Header set Access-Control-Allow-Origin "*"
+# Header set Access-Control-Allow-Origin "*"
 # クレデンシャル
 # Header set Access-Control-Allow-Credentials true

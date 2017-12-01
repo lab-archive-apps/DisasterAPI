@@ -1,10 +1,11 @@
 <?php
 namespace App\Controller\API;
 
+use App\Models\File;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
-
+use App\Uploads\Upload;
 
 class FilesController extends BaseController{
     private $res = [
@@ -28,47 +29,69 @@ class FilesController extends BaseController{
     /* Temp Upload */
     public function postTempFile(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $tempPath = $params->path->public_path . 'temp';
-        // Check Temp directory if exist.
-        if (!file_exists($tempPath)) {
-            mkdir(public_path($tempPath), 0777, true);
+
+        if(!isset($_FILES)){
+            $this->res['error'] = 'File not found.';
+            return $response->withJson($this->res);
         }
 
         // Upload Logic.
-//        if($_FILES['file']['tmp_name']){
-//            $name = 'temp_' . date('YmdHis') . '_' . $_FILES['file']['name'];
-//            if(move_uploaded_file($_FILES['file']['tmp_name'], $tempPath . '/' . $name)){
-//                chmod($tempPath . '/' . $name, 0755);
-//                $this->res['result'] = 'success';
-//                $this->res['state'] = true;
-//                $this->res['id'] = $name;
-//                $this->res['error'] = 'Upload Success.';
-//            }else {
-//                $this->res['error'] = 'Upload Failed.';
-//                $this->res['id'] = null;
-//            }
-//        }else {
-//            $this->res['error'] = 'Not exist file in params．';
-//        }
-        foreach($_FILES['file']['type'] as $key => $f){
-            $this->res[$key] = $f;
+        for($i = 0; $i < count($_FILES); $i++){
+            if($_FILES["file-$i"]['tmp_name']) {
+                // Change State.
+                $this->res['result'] = 'success';
+                $this->res['state'] = true;
+                // Upload Function
+                $upload = Upload::getInstance();
+                $upload->init($params->path);
+                $result = $upload->tempUpload($_FILES["file-$i"]);
+                if ($result['state']) {
+                    $this->res['files'][$i]['result'] = 'success';
+                    $this->res['files'][$i]['state'] = true;
+                    $this->res['files'][$i]['id'] = $result['id'];
+                    $this->res['files'][$i]['error'] = 'Upload Success.';
+                } else {
+                    $this->res['files'][$i]['error'] = 'Upload Failed.';
+                    $this->res['files'][$i]['id'] = null;
+                }
+            } else {
+                $this->res['files'][$i]['error'] = 'Not exist file in params．';
+            }
+            $this->res['files'][$i]['name'] = $_FILES["file-$i"]['name'];
+            $this->res['files'][$i]['type'] = $_FILES["file-$i"]['type'];
         }
-
         return $response->withJson($this->res);
     }
 
     /* Delete File */
     public function deleteFile(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $tempPath = $params->path->public_path . 'temp';
-        if(unlink($tempPath . '/' . $params->post->id)){
-            $this->res['result'] = 'success';
-            $this->res['state'] = true;
-        }else{
-            $this->res['error'] = '削除に失敗しました．';
+        $file = File::find($params->post->id);
+        if (file_exists($file->path)) {
+            if(unlink($file->path)){
+                $file->delete();
+                $this->res['result'] = 'success';
+                $this->res['state'] = true;
+            } else{
+                $this->res['error'] = '削除に失敗しました．';
+            }
         }
-        $this->res['p'] = $params->post;
 
+        return $response->withJson($this->res);
+    }
+
+    /* Delete Temp File */
+    public function deleteTempFile(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+        $tempPath = $params->path->public_path . 'temp';
+        if (file_exists($tempPath . '/' . $params->post->id)) {
+            if(unlink($tempPath . '/' . $params->post->id)){
+                $this->res['result'] = 'success';
+                $this->res['state'] = true;
+            }else{
+                $this->res['error'] = '削除に失敗しました．';
+            }
+        }
         return $response->withJson($this->res);
     }
 

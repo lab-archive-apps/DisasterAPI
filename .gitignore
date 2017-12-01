@@ -6,3 +6,5 @@ node_modules/
 database.xml
 public/js/app.js
 .php-version
+public/uploads/
+public/temp/

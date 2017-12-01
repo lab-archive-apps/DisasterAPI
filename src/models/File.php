@@ -17,6 +17,8 @@ class File extends BaseModel{
     protected $fillable = [
         'resource_id',
         'resource_type',
+        'name',
+        'type',
         'path',
         'thumbnail_path'
     ];
