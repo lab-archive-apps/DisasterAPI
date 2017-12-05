@@ -9,7 +9,6 @@ return [
 
         // Renderer settings
         'renderer' => [
-            'views_path' => __DIR__ . '/views/',
             'public_path' => __DIR__ . '/../public/',
         ],
 

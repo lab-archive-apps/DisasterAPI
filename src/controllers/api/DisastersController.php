@@ -31,7 +31,6 @@ class DisastersController extends BaseController{
     {
         $params = $request->getAttribute('params');
 
-        // TODO: not use find(), because if $disasters returned "[]", slim3 would call "500 error".
         $disaster = Disaster::query()->find($params->get->disaster_id);
         return $response->withJson($disaster);
     }

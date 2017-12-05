@@ -21,75 +21,13 @@ $corsMw->init($app->getContainer());
 // Application Middleware
 $app->add($pathMw);
 
-// public path
-// FIXME: グローバル変数で public_pathを求める方法があれば即座にそちらへ変更する
-//$app->any(__DIR__ . '/../public/', function(){})->setName('public_path');
-
-// Login Process
-$app->get('/', '\App\Controller\AuthController:getLogin')->setName('root');
-$app->post('/login', '\App\Controller\AuthController:postLogin')->setName('login');
-$app->post('/logout', '\App\Controller\AuthController:postLogout')->setName('logout');
-
-// Top
-$app->get('/top', '\App\Controller\TopController:index')
-    ->setName('top')->add($authMw);
-
-/* ===== Disaster System ===== */
-// Disaster Management
-$app->group('/disasters', function () {
-    // Disaster Management System
-    $this->get('', '\App\Controller\DisastersController:index')->setName('disaster_index');
-    // Select Disaster's list
-    $this->get('/selects', '\App\Controller\DisastersController:select')->setName('disaster_select');
-    $this->get('/create', '\App\Controller\DisastersController:create')->setName('disaster_create');
-    $this->post('', '\App\Controller\DisastersController:store')->setName('disaster_store');
-    $this->group('/{disasterId}', function () {
-        $this->get('', '\App\Controller\DisastersController:show')->setName('disaster_show');
-        $this->get('/edit', '\App\Controller\DisastersController:edit')->setName('disaster_edit');
-        $this->map(['PATCH', 'PUT'], '', '\App\Controller\DisastersController:update')->setName('disaster_update');
-        $this->delete('', '\App\Controller\DisastersController:delete')->setName('disaster_delete');
-
-        // Disaster ResponseRecord Management System
-        $this->group('/corresponds', function () {
-            $this->get('', '\App\Controller\DisasterCorrespondsController:index')->setName('correspond_index');
-            $this->get('/create', '\App\Controller\DisasterCorrespondsController:create')->setName('correspond_create');
-            $this->post('', '\App\Controller\DisasterCorrespondsController:store')->setName('correspond_store');
-
-            $this->group('/{correspondId}', function () {
-                $this->get('', '\App\Controller\DisasterCorrespondsController:show')->setName('correspond_show');
-                $this->get('/edit', '\App\Controller\DisasterCorrespondsController:edit')->setName('correspond_edit');
-                $this->map(['PATCH', 'PUT'], '', '\App\Controller\DisasterCorrespondsController:update')->setName('correspond_update');
-                $this->delete('', '\App\Controller\DisasterCorrespondsController:delete')->setName('correspond_delete');
-            });
-        });
-    });
-})->add($authMw);
-
-/* ===== Settings ===== */
-// User Management System
-$app->group('/users', function () {
-    $this->get('', '\App\Controller\UsersController:index')->setName('user_index');
-    $this->get('/create', '\App\Controller\UsersController:create')->setName('user_create');
-    $this->post('', '\App\Controller\UsersController:store')->setName('user_store');
-    $this->group('/{userId}', function () {
-        $this->get('', '\App\Controller\UsersController:show')->setName('user_show');
-        $this->get('/edit', '\App\Controller\UsersController:edit')->setName('user_edit');
-        $this->map(['PATCH', 'PUT'], '', '\App\Controller\UsersController:update')->setName('user_update');
-        $this->delete('', '\App\Controller\UsersController:delete')->setName('user_delete');
-    });
-})->add($authMw);
-
-/* !===== Settings =====! */
-
 /* ===== Web API ===== */
 $app->group('/api', function () {
     // Disaster Management System
     $this->get('/getDisaster', '\App\Controller\API\DisastersController:getDisaster')->setName('get_disaster');
     $this->get('/getDisasters', '\App\Controller\API\DisastersController:getDisasters')->setName('get_disasters');
     $this->post('/postDisaster', '\App\Controller\API\DisastersController:postDisaster')->setName('post_disaster');
-    // $this->map(['PATCH', 'PUT'], '/updateDisaster', '\App\Controller\API\DisastersController:updateDisaster')->setName('update_disaster');
     $this->post('/updateDisaster', '\App\Controller\API\DisastersController:updateDisaster')->setName('update_disaster');
-    // $this->delete('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
     $this->post('/deleteDisaster', '\App\Controller\API\DisastersController:deleteDisaster')->setName('delete_disaster');
     // Disaster Response Record Management System
     $this->get('/getResponseRecord', '\App\Controller\API\ResponseRecordsController:getResponseRecord')->setName('get_response_record');
@@ -104,11 +42,18 @@ $app->group('/api', function () {
     $this->post('/updatePreventionPlan', '\App\Controller\API\PreventionPlansController:updatePreventionPlan')->setName('update_prevention_plan');
     $this->post('/deletePreventionPlan', '\App\Controller\API\PreventionPlansController:deletePreventionPlan')->setName('delete_prevention_plan');
     // User Management System
-    // Area Management System
+    $this->get('/getUser', '\App\Controller\API\UsersController:getUser')->setName('get_user');
+    $this->get('/getUsers', '\App\Controller\API\UsersController:getUsers')->setName('get_users');
+    $this->post('/postUser', '\App\Controller\API\UsersController:postUser')->setName('post_user');
+    $this->post('/updateUser', '\App\Controller\API\UsersController:updateUser')->setName('update_user');
+    $this->post('/deleteUser', '\App\Controller\API\UsersController:deleteUser')->setName('delete_user');
     // Social Media Management System
     // File System
     $this->post('/postFile', '\App\Controller\API\FilesController:postFile')->setName('post_file');
     $this->post('/postTempFile', '\App\Controller\API\FilesController:postTempFile')->setName('post_temp_file');
     $this->post('/deleteFile', '\App\Controller\API\FilesController:deleteFile')->setName('delete_file');
     $this->post('/deleteTempFile', '\App\Controller\API\FilesController:deleteTempFile')->setName('delete_file');
+    // GeoJson
+    $this->get('/geoJson', '\App\Controller\API\GeoJsonController:getGeoJson')->setName('get_geo_json');
+    // Auth Control
 })->add($corsMw);

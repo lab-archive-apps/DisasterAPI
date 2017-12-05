@@ -11,8 +11,10 @@ class User extends BaseModel {
 
     // enable params when called create method.
     protected $fillable = [
+        'name',
         'user_id',
         'password',
+        'division',
         'admin',
     ];
 }
