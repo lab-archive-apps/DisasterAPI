@@ -32,7 +32,6 @@ class PreventionPlansController extends BaseController{
     public function getPreventionPlan(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
 
-        // TODO: not use find(), because if $preventionPlans returned "[]", slim3 would call "500 error".
         $preventionPlan = PreventionPlan::findOrFail($params->get->plan_id);
         $preventionPlan['uploads'] = $preventionPlan->uploads;
         return $response->withJson($preventionPlan);
@@ -108,12 +107,12 @@ class PreventionPlansController extends BaseController{
         $files = [];
         $array = (array)$params->post;
         for($i = 0; $i < intval($params->post->fileCounts); $i++){
-            if($upload->move($array["file_".$i."_id"], $array["file_".$i."_name"])){
+            if($upload->move($array["file_".$i."_id"], 'plans/' . $array["file_".$i."_name"])){
                 $f = new File();
                 $f->fill([
                     'name' => $array["file_".$i."_name"],
                     'type' => $upload->getType($array["file_".$i."_name"]),
-                    'path' => $upload->getUploadPath() . $array["file_".$i."_name"],
+                    'path' => $upload->getUploadPath() . 'plans/' . $array["file_".$i."_name"],
                     'thumbnail_path' => ''
                 ]);
                 $files[] = $f;

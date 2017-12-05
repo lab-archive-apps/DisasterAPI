@@ -9,7 +9,7 @@ namespace App\Models;
 class Disaster extends BaseModel{
     protected $table = 'disasters'; // Set a Table Name
 
-    public function corresponds(){
+    public function records(){
         return $this->hasMany('App\Models\ResponseRecord', 'disaster_id');
     }
 

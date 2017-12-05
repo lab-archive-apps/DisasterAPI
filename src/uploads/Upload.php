@@ -27,6 +27,14 @@ class Upload extends SingletonCore {
         if (!file_exists($this->uploadPath)) {
             mkdir(public_path($this->uploadPath), 0777, true);
         }
+
+        if (!file_exists($this->uploadPath . '/plans')) {
+            mkdir(public_path($this->uploadPath. '/plans'), 0777, true);
+        }
+
+        if (!file_exists($this->uploadPath . '/records')) {
+            mkdir(public_path($this->uploadPath. '/records'), 0777, true);
+        }
     }
 
     public function getPublicPath(){

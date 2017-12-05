@@ -15,16 +15,16 @@ class FilesController extends BaseController{
     ];
 
     /* Upload */
-    public function postFile(Request $request, Response $response, $args){
-        $params = $request->getAttribute('params');
-        $uploadPath = $params->path->public_path . 'uploads';
-        // Check upload directory if exist.
-        if (!file_exists($uploadPath)) {
-            mkdir(public_path($uploadPath), 0777, true);
-        }
-
-        return $response->withJson($this->res);
-    }
+//    public function postFile(Request $request, Response $response, $args){
+//        $params = $request->getAttribute('params');
+//        $uploadPath = $params->path->public_path . 'uploads';
+//        // Check upload directory if exist.
+//        if (!file_exists($uploadPath)) {
+//            mkdir(public_path($uploadPath), 0777, true);
+//        }
+//
+//        return $response->withJson($this->res);
+//    }
 
     /* Temp Upload */
     public function postTempFile(Request $request, Response $response, $args){

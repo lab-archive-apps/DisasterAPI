@@ -32,8 +32,8 @@ class DisastersController extends BaseController{
         $params = $request->getAttribute('params');
 
         // TODO: not use find(), because if $disasters returned "[]", slim3 would call "500 error".
-        $disasters = Disaster::query()->find($params->get->disaster_id);
-        return $response->withJson($disasters);
+        $disaster = Disaster::query()->find($params->get->disaster_id);
+        return $response->withJson($disaster);
     }
 
     /* Post disaster */
@@ -97,7 +97,7 @@ class DisastersController extends BaseController{
     /* Delete disaster */
     public function deleteDisaster(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $disaster = Disaster::find($params->post->disaster_id);
+        $disaster = Disaster::find($params->post->id);
 
         if ($disaster->delete()) {
             $this->res['result'] = 'success';

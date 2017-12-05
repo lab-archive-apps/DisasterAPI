@@ -14,15 +14,15 @@ class ResponseRecord extends BaseModel {
     }
 
     public function uploads(){
-        return $this->hasMany('App\Models\File');
+        return $this->morphMany('App\Models\File', 'resource');
     }
 
     // enable params when called create method.
     protected $fillable = [
         'disaster_id',
-        'name',
+        'division',
         'section',
-        'contents',
+        'status',
         'comments',
     ];
 }

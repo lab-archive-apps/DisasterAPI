@@ -7,6 +7,6 @@ class ResponseRecordSearch extends BaseSearch {
     public function search() {
         return $this->query
             ->orderBy('created_at', 'desc')
-            ->get(['id', 'name']);
+            ->get(['id', 'division', 'section', 'status']);
     }
 }
