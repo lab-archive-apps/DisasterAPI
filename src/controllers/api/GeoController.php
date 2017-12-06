@@ -44,6 +44,8 @@ class GeoController extends BaseController{
         // Enable Multiple params
         foreach(explode(',', $params->get->city_ids) as $key => $id){
             $city = City::find($id);
+            if(!file_exists($city->path))
+                continue;
             $paths[] = [
                 'name' => $city->name,
                 'path' => file_get_contents($city->path)
