@@ -53,7 +53,11 @@ $app->group('/api', function () {
     $this->post('/postTempFile', '\App\Controller\API\FilesController:postTempFile')->setName('post_temp_file');
     $this->post('/deleteFile', '\App\Controller\API\FilesController:deleteFile')->setName('delete_file');
     $this->post('/deleteTempFile', '\App\Controller\API\FilesController:deleteTempFile')->setName('delete_file');
-    // GeoJson
-    $this->get('/geoJson', '\App\Controller\API\GeoJsonController:getGeoJson')->setName('get_geo_json');
+    // Geo Control
+    $this->get('/getRegion', '\App\Controller\API\GeoController:getRegion')->setName('get_region');
+    $this->get('/getPrefecture', '\App\Controller\API\GeoController:getPrefecture')->setName('get_prefecture');
+    $this->get('/getCity', '\App\Controller\API\GeoController:getCity')->setName('get_city');
+    $this->get('/getGeoJson', '\App\Controller\API\GeoController:getGeoJson')->setName('get_geo_json');
+    $this->post('/postCity', '\App\Controller\API\GeoController:postCity')->setName('post_city');
     // Auth Control
 })->add($corsMw);

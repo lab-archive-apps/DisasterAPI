@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
 use App\Search\PreventionPlanSearch;
-use App\Models\PreventionPlan;
+use App\Models\Storage\PreventionPlan;
 use App\Uploads\Upload;
 
 class PreventionPlansController extends BaseController{

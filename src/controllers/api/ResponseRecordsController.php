@@ -5,8 +5,8 @@ namespace App\Controller\API;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
-use App\Models\Disaster;
-use App\Models\ResponseRecord;
+use App\Models\Storage\Disaster;
+use App\Models\Storage\ResponseRecord;
 use App\Search\ResponseRecordSearch;
 use App\Uploads\Upload;
 use App\Models\File;
@@ -59,7 +59,6 @@ class ResponseRecordsController extends BaseController{
         }else{
             $this->res['error'] = '登録に失敗しました．';
         }
-        $this->res['p'] = $params->post;
 
         return $response->withJson($this->res);
     }

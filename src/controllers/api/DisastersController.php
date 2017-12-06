@@ -4,7 +4,7 @@ namespace App\Controller\API;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
-use App\Models\Disaster;
+use App\Models\Storage\Disaster;
 use App\Search\DisasterSearch;
 
 class DisastersController extends BaseController{

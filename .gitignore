@@ -8,3 +8,5 @@ public/js/app.js
 .php-version
 public/uploads/
 public/temp/
+schema.sql
+data/
