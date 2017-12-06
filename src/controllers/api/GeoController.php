@@ -5,9 +5,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
 
-use App\Models\Area\Region;
-use App\Models\Area\Prefecture;
-use App\Models\Area\City;
+use App\Models\Region\Area;
+use App\Models\Region\Prefecture;
+use App\Models\Region\City;
 use App\Uploads\Upload;
 use SplFileObject;
 
@@ -18,16 +18,16 @@ class GeoController extends BaseController{
         'error' => ''
     ];
 
-    public function getRegion(Request $request, Response $response, $args){
+    public function getArea(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $regions = Region::query()->get(['id', 'name']);
-        return $response->withJson($regions);
+        $areas = Area::query()->get(['id', 'name']);
+        return $response->withJson($areas);
     }
 
     public function getPrefecture(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
-        $region = Region::find($params->get->region_id);
-        $prefectures = $region->prefectures()->get(['id', 'name']);
+        $area = Area::find($params->get->area_id);
+        $prefectures = $area->prefectures()->get(['id', 'name']);
         return $response->withJson($prefectures);
     }
 

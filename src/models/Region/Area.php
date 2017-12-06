@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Area;
+namespace App\Models\Region;
 
 use App\Models\BaseModel;
 /**
@@ -7,11 +7,11 @@ use App\Models\BaseModel;
  * Class Disaster Correspond Content
  * @package App\Models
  */
-class Region extends BaseModel {
-    protected $table = 'regions'; // Set a Table Name
+class Area extends BaseModel {
+    protected $table = 'areas'; // Set a Table Name
 
     public function prefectures() {
-        return $this->hasMany('App\Models\Area\Prefecture');
+        return $this->hasMany('App\Models\Region\Prefecture');
     }
 
     // enable params when called create method.

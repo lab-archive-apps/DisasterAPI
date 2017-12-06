@@ -54,7 +54,7 @@ $app->group('/api', function () {
     $this->post('/deleteFile', '\App\Controller\API\FilesController:deleteFile')->setName('delete_file');
     $this->post('/deleteTempFile', '\App\Controller\API\FilesController:deleteTempFile')->setName('delete_file');
     // Geo Control
-    $this->get('/getRegion', '\App\Controller\API\GeoController:getRegion')->setName('get_region');
+    $this->get('/getArea', '\App\Controller\API\GeoController:getArea')->setName('get_area');
     $this->get('/getPrefecture', '\App\Controller\API\GeoController:getPrefecture')->setName('get_prefecture');
     $this->get('/getCity', '\App\Controller\API\GeoController:getCity')->setName('get_city');
     $this->get('/getGeoJson', '\App\Controller\API\GeoController:getGeoJson')->setName('get_geo_json');

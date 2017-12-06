@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Area;
+namespace App\Models\Region;
 
 use App\Models\BaseModel;
 
@@ -12,7 +12,7 @@ class City extends BaseModel {
     protected $table = 'cities'; // Set a Table Name
 
     public function prefecture(){
-        return $this->belongsTo('App\Models\Area\Prefecture');
+        return $this->belongsTo('App\Models\Region\Prefecture');
     }
 
     // enable params when called create method.
