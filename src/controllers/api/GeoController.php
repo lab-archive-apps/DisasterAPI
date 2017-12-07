@@ -8,8 +8,6 @@ use App\Controller\BaseController;
 use App\Models\Region\Area;
 use App\Models\Region\Prefecture;
 use App\Models\Region\City;
-use App\Uploads\Upload;
-use SplFileObject;
 
 class GeoController extends BaseController{
     private $res = [

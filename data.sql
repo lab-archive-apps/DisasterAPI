@@ -18,6 +18,77 @@
 --
 -- Table structure for table `cities`
 --
+CREATE TABLE classifications (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE scales (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE sections (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE status (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+insert into classifications(name) values
+('Earthquake Disaster'),
+('Tsunami Disaster'),
+('Wind and Flood Disaster'),
+('Volcanic Eruption Disaster'),
+('Snow Storm Disaster'),
+('Maritime Disaster'),
+('Aerial Disaster'),
+('Railway Disaster'),
+('Road Disaster'),
+('Nuclear Disaster'),
+('Dangerous product Disaster'),
+('Large Scale Fire Disaster'),
+('Forest Disaster');
+
+
+insert into scales(name) values
+('Extremely Large'),
+('Large'),
+('Medium'),
+('Small'),
+('Extremely Small');
+
+insert into status(name) values
+('New'),
+('Update'),
+('Waiting'),
+('Corresponding'),
+('Complete'),
+('Forced Termination');
+
+insert into sections(label, name) values
+('establishment', 'Establishment'),
+('lifeline', 'Lifeline'),
+('road', 'Road'),
+('shelter', 'Shelter'),
+('staff', 'staff'),
+('Other', 'Other');
+
 
 DROP TABLE IF EXISTS `cities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

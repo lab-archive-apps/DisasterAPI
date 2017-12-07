@@ -14,7 +14,6 @@ class DisastersController extends BaseController{
         'error' => ''
     ];
 
-
     /* Get disasters */
     public function getDisasters(Request $request, Response $response, $args)
     {
