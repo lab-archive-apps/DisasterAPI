@@ -89,7 +89,6 @@ class SettingsController extends BaseController {
         $classification = Classification::find($params->post->id);
         $this->update($classification, [
             'name' => $params->post->name,
-            'label' => $params->post->label
         ]);
         return $response->withJson($this->res);
     }
