@@ -8,12 +8,6 @@ use App\Controller\BaseController;
 use App\Uploads\Upload;
 
 class FilesController extends BaseController{
-    private $res = [
-        'result' => 'failed',
-        'state' => false,
-        'error' => ''
-    ];
-
     /* Upload */
 //    public function postFile(Request $request, Response $response, $args){
 //        $params = $request->getAttribute('params');

@@ -10,12 +10,6 @@ use App\Search\UserSearch;
 
 /* User Management Controller */
 class UsersController extends BaseController {
-    private $res = [
-        'result' => 'failed',
-        'state' => false,
-        'error' => ''
-    ];
-
     /* Get users */
     public function getUsers(Request $request, Response $response, $args)
     {
