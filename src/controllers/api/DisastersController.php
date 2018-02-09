@@ -8,12 +8,6 @@ use App\Models\Storage\Disaster;
 use App\Search\DisasterSearch;
 
 class DisastersController extends BaseController{
-    private $res = [
-        'result' => 'failed',
-        'state' => false,
-        'error' => ''
-    ];
-
     /* Get disasters */
     public function getDisasters(Request $request, Response $response, $args)
     {

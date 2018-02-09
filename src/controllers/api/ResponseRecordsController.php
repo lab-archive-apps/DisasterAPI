@@ -12,12 +12,6 @@ use App\Uploads\Upload;
 use App\Models\File;
 
 class ResponseRecordsController extends BaseController{
-    private $res = [
-        'result' => 'failed',
-        'state' => false,
-        'error' => ''
-    ];
-
     /* Get responseRecords */
     public function getResponseRecords(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');

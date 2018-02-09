@@ -11,12 +11,6 @@ use App\Models\Storage\PreventionPlan;
 use App\Uploads\Upload;
 
 class PreventionPlansController extends BaseController{
-    private $res = [
-        'result' => 'failed',
-        'state' => false,
-        'error' => ''
-    ];
-
     /* Get preventionPlans */
     public function getPreventionPlans(Request $request, Response $response, $args)
     {

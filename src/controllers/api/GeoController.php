@@ -10,12 +10,6 @@ use App\Models\Region\Prefecture;
 use App\Models\Region\City;
 
 class GeoController extends BaseController{
-    private $res = [
-        'result' => 'failed',
-        'state' => false,
-        'error' => ''
-    ];
-
     public function getArea(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
         $areas = Area::query()->get(['id', 'name']);

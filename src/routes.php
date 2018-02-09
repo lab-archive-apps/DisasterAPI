@@ -53,7 +53,7 @@ $app->group('/api', function () {
     $this->post('/postFile', '\App\Controller\API\FilesController:postFile')->setName('post_file');
     $this->post('/postTempFile', '\App\Controller\API\FilesController:postTempFile')->setName('post_temp_file');
     $this->post('/deleteFile', '\App\Controller\API\FilesController:deleteFile')->setName('delete_file');
-    $this->post('/deleteTempFile', '\App\Controller\API\FilesController:deleteTempFile')->setName('delete_file');
+    $this->post('/deleteTempFile', '\App\Controller\API\FilesController:deleteTempFile')->setName('delete_temp_file');
     // Geo Control
     $this->get('/getArea', '\App\Controller\API\GeoController:getArea')->setName('get_area');
     $this->get('/getPrefecture', '\App\Controller\API\GeoController:getPrefecture')->setName('get_prefecture');
@@ -72,14 +72,19 @@ $app->group('/api', function () {
     $this->post('/deleteScale', 'App\Controller\API\SettingsController:deleteScale')->setName('delete_scales');
     // Section Management System
     $this->get('/getSections', 'App\Controller\API\SettingsController:getSections')->setName('get_sections');
-    $this->post('/postSection', 'App\Controller\API\SettingsController:postSection')->setName('post_sections');
-    $this->post('/updateSection', 'App\Controller\API\SettingsController:updateSection')->setName('update_sections');
-    $this->post('/deleteSection', 'App\Controller\API\SettingsController:deleteSection')->setName('delete_sections');
+    $this->post('/postSection', 'App\Controller\API\SettingsController:postSection')->setName('post_section');
+    $this->post('/updateSection', 'App\Controller\API\SettingsController:updateSection')->setName('update_section');
+    $this->post('/deleteSection', 'App\Controller\API\SettingsController:deleteSection')->setName('delete_section');
     // Status Management System
     $this->get('/getStatus', 'App\Controller\API\SettingsController:getStatus')->setName('get_status');
-    $this->post('/postStatus', 'App\Controller\API\SettingsController:postStatus')->setName('post_statuss');
-    $this->post('/updateStatus', 'App\Controller\API\SettingsController:updateStatus')->setName('update_statuss');
-    $this->post('/deleteStatus', 'App\Controller\API\SettingsController:deleteStatus')->setName('delete_statuss');
+    $this->post('/postStatus', 'App\Controller\API\SettingsController:postStatus')->setName('post_status');
+    $this->post('/updateStatus', 'App\Controller\API\SettingsController:updateStatus')->setName('update_status');
+    $this->post('/deleteStatus', 'App\Controller\API\SettingsController:deleteStatus')->setName('delete_status');
+    // Division Management System
+    $this->get('/getDivisions', 'App\Controller\API\SettingsController:getDivisions')->setName('get_divisions');
+    $this->post('/postDivision', 'App\Controller\API\SettingsController:postDivision')->setName('post_division');
+    $this->post('/updateDivision', 'App\Controller\API\SettingsController:updateDivision')->setName('update_division');
+    $this->post('/deleteDivision', 'App\Controller\API\SettingsController:deleteDivision')->setName('delete_division');
     // Auth Control
     /* === Visualization System === */
 })->add($corsMw);

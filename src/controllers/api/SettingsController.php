@@ -10,15 +10,10 @@ use App\Models\Setting\Classification;
 use App\Models\Setting\Scale;
 use App\Models\Setting\Section;
 use App\Models\Setting\Status;
+use App\Models\Setting\Division;
 
 /* Setting Management Controller */
 class SettingsController extends BaseController {
-    private $res = [
-        'result' => 'failed',
-        'state' => false,
-        'error' => ''
-    ];
-
     /* Get classifications */
     public function getClassifications(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
@@ -41,6 +36,12 @@ class SettingsController extends BaseController {
     public function getStatus(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
         return $response->withJson($this->index(Status::query()));
+    }
+
+    /* Get divisions */
+    public function getDivisions(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+        return $response->withJson($this->index(Division::query()));
     }
 
     /* Post classification */
@@ -78,6 +79,16 @@ class SettingsController extends BaseController {
         $params = $request->getAttribute('params');
         $status = new Status();
         $this->create($status, [
+            'name' => $params->post->name
+        ]);
+        return $response->withJson($this->res);
+    }
+
+    /* Post division */
+    public function postDivision(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+        $division = new Division();
+        $this->create($division, [
             'name' => $params->post->name
         ]);
         return $response->withJson($this->res);
@@ -124,6 +135,16 @@ class SettingsController extends BaseController {
         return $response->withJson($this->res);
     }
 
+    /* Update division */
+    public function updateDivision(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+        $division = Division::find($params->post->id);
+        $this->update($division, [
+            'name' => $params->post->name
+        ]);
+        return $response->withJson($this->res);
+    }
+
     /* Delete classification */
     public function deleteClassification(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');
@@ -153,6 +174,14 @@ class SettingsController extends BaseController {
         $params = $request->getAttribute('params');
         $status = Status::find($params->post->id);
         $this->delete($status);
+        return $response->withJson($this->res);
+    }
+
+    /* Delete division */
+    public function deleteDivision(Request $request, Response $response, $args){
+        $params = $request->getAttribute('params');
+        $division = Division::find($params->post->id);
+        $this->delete($division);
         return $response->withJson($this->res);
     }
 

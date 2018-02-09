@@ -50,6 +50,14 @@ CREATE TABLE status (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE divisions (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
 insert into classifications(name) values
 ('Earthquake Disaster'),
 ('Tsunami Disaster'),
@@ -89,6 +97,11 @@ insert into sections(label, name) values
 ('staff', 'staff'),
 ('Other', 'Other');
 
+insert into divisions(name) values
+('災害対策本部'),
+('地域安全課'),
+('人事課'),
+('総務課');
 
 DROP TABLE IF EXISTS `cities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

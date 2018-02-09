@@ -8,6 +8,11 @@ abstract class BaseController {
     protected $container = null;    // Container of Slim Framework
     protected $session = null;      // Session
     protected $router = null;       // router
+    protected $res = [
+        'result' => 'failed',
+        'state' => false,
+        'error' => ''
+    ];
 
     function __invoke($req, $res, $args){}
 
