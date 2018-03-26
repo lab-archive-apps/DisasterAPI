@@ -6,5 +6,6 @@ logs/
 database.xml
 .php-version
 **.sql
+/**/.DS_Store
 composer.lock
 package-lock.json

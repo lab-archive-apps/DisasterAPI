@@ -8,3 +8,5 @@
 
 - PHP
   - Slim3
+- JavaScript
+  
