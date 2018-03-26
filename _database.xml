@@ -1,3 +1,4 @@
+<!-- TODO: you must renamt this file to "database.xml". -->
 <database>
     <production>
         <host></host>

@@ -1,5 +1,4 @@
 .idea/
-node_modules/
 vendor/
 logs/
 !/logs/README.md
@@ -8,4 +7,3 @@ database.xml
 **.sql
 /**/.DS_Store
 composer.lock
-package-lock.json
