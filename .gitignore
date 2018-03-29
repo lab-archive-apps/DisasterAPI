@@ -5,5 +5,5 @@ logs/
 database.xml
 .php-version
 **.sql
-/**/.DS_Store
+**/.DS_Store
 composer.lock
