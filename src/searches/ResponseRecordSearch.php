@@ -9,4 +9,8 @@ class ResponseRecordSearch extends BaseSearch {
             ->orderBy('created_at', $this->order)
             ->get(['id', 'division', 'section', 'status']);
     }
+
+    public function getLatestCount() {
+        return $this->getLatestItem($this->query);
+    }
 }

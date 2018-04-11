@@ -100,6 +100,16 @@ class ResponseRecordsController extends BaseController{
         return $response->withJson($this->res);
     }
 
+    /* Get a count of saved disaster info for each year or month. */
+    public function getLatestResponseRecord(Request $request, Response $response, $args) {
+        $params = $request->getAttribute('params');
+
+        $query = new ResponseRecordSearch(ResponseRecord::query(), $params->get);
+        $latestDisasters = $query->getLatestCount();
+
+        return $response->withJson($latestDisasters);
+    }
+
     private function uploadFiles($params, $responseRecord){
         $upload = Upload::getInstance();
         $upload->init($params->path);

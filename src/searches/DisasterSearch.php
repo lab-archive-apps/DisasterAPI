@@ -11,6 +11,6 @@ class DisasterSearch extends BaseSearch {
     }
 
     public function getLatestCount() {
-        return $this->query;
+        return $this->getLatestItem($this->query);
     }
 }

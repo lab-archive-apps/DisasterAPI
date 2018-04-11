@@ -95,6 +95,16 @@ class PreventionPlansController extends BaseController{
         return $response->withJson($this->res);
     }
 
+    /* Get a count of saved plan for each year or month. */
+    public function getLatestPreventionPlan(Request $request, Response $response, $args) {
+        $params = $request->getAttribute('params');
+
+        $query = new PreventionPlanSearch(PreventionPlan::query(), $params->get);
+        $latestDisasters = $query->getLatestCount();
+
+        return $response->withJson($latestDisasters);
+    }
+
     private function uploadFiles($params, $preventionPlan){
         $upload = Upload::getInstance();
         $upload->init($params->path);

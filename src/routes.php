@@ -24,6 +24,9 @@ $app->add($pathMw);
 /* ===== Web API ===== */
 $app->group('/api', function () {
     /* === Storage System === */
+    $this->get('/getLatestDisaster', '\App\Controller\API\DisastersController:getLatestDisaster')->setName('get_latest_disaster');
+    $this->get('/getLatestResponseRecord', '\App\Controller\API\ResponseRecordsController:getLatestResponseRecord')->setName('get_latest_record');
+    $this->get('/getLatestPreventionPlan', '\App\Controller\API\PreventionPlansController:getLatestPreventionPlan')->setName('get_latest_plan');
     // Disaster Management System
     $this->get('/getDisaster', '\App\Controller\API\DisastersController:getDisaster')->setName('get_disaster');
     $this->get('/getDisasters', '\App\Controller\API\DisastersController:getDisasters')->setName('get_disasters');

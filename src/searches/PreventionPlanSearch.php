@@ -9,4 +9,8 @@ class PreventionPlanSearch extends BaseSearch {
             ->orderBy('created_at', $this->order)
             ->get(['id', 'name', 'classification']);
     }
+
+    public function getLatestCount() {
+        return $this->getLatestItem($this->query);
+    }
 }
