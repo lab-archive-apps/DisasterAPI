@@ -7,6 +7,11 @@ use App\Controller\BaseController;
 use App\Models\Storage\Disaster;
 use App\Search\DisasterSearch;
 
+/**
+ * Control a Disaster info
+ * Class DisastersController
+ * @package App\Controller\API
+ */
 class DisastersController extends BaseController{
     /* Get disasters */
     public function getDisasters(Request $request, Response $response, $args)
@@ -98,5 +103,15 @@ class DisastersController extends BaseController{
             $this->res['error'] = '削除に失敗しました．';
         }
         return $response->withJson($this->res);
+    }
+
+    /* Get a count of saved disaster info for each year or month. */
+    public function getLatestDisaster(Request $request, Response $response, $args) {
+        $params = $request->getAttribute('params');
+
+        $query = new DisasterSearch(Disaster::query(), $params->get);
+        $latestDisasters = $query->getLatestCount();
+
+        return $response->withJson($latestDisasters);
     }
 }

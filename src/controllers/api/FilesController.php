@@ -7,6 +7,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controller\BaseController;
 use App\Uploads\Upload;
 
+/**
+ * Control the file upload function.
+ * Class FilesController
+ * @package App\Controller\API
+ */
 class FilesController extends BaseController{
     /* Upload */
 //    public function postFile(Request $request, Response $response, $args){

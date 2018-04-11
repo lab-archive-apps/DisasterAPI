@@ -9,6 +9,11 @@ use App\Models\Region\Area;
 use App\Models\Region\Prefecture;
 use App\Models\Region\City;
 
+/**
+ * Control a GeoJSON for area, prefecture, city in Japan.
+ * Class GeoController
+ * @package App\Controller\API
+ */
 class GeoController extends BaseController{
     public function getArea(Request $request, Response $response, $args){
         $params = $request->getAttribute('params');

@@ -6,7 +6,7 @@ namespace App\Search;
 class PreventionPlanSearch extends BaseSearch {
     public function search() {
         return $this->query
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', $this->order)
             ->get(['id', 'name', 'classification']);
     }
 }

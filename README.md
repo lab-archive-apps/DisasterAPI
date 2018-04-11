@@ -2,11 +2,12 @@
 
 > An API for management disaster information.
 
-## Documentation
+[Documentation(coming soon)]()
+
+[API Definition(coming soon)]()
 
 ## Use technologies
 
 - PHP
   - Slim3
-- JavaScript
   

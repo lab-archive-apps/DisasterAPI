@@ -2,7 +2,7 @@
 
 namespace App\Config;
 
-use Mapyo\EloquentOnly\Eloquent;
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Exception;
 
 /**
@@ -20,6 +20,9 @@ final class DBManager extends SingletonCore {
     // Database Config Object
     private $config;
 
+    private $capsule;
+
+
     protected function __construct(){
         // XMLから読み込む
         $xml = simplexml_load_file($this->xml);
@@ -27,12 +30,14 @@ final class DBManager extends SingletonCore {
         $xmlObj = get_object_vars($xml);
         // 環境毎の設定を取り出す
         $this->config = $xmlObj[$this->env];
+
+        $this->capsule = new Capsule;
     }
 
     public function init(){
         // 接続処理
         try {
-            Eloquent::init([
+            $this->capsule->addConnection([
                 'driver'   => 'mysql',
                 'host'     => '127.0.0.1',
                 'database' => $this->config->db,
@@ -42,6 +47,8 @@ final class DBManager extends SingletonCore {
                 'collation' => 'utf8_unicode_ci',
                 'charset'  => $this->config->charset,
             ]);
+            $this->capsule->setAsGlobal();
+            $this->capsule->bootEloquent();
         }catch (Exception $e){
             exit('データベース接続失敗。' . $e->getMessage());
         }

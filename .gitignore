@@ -1,9 +1,12 @@
-.idea/
+*.idea/
 vendor/
 logs/
 !/logs/README.md
 database.xml
-.php-version
-**.sql
-**/.DS_Store
+*.php-version
+*.sql
+*.DS_Store
 composer.lock
+public/geojson/
+public/temp/
+public/uploads/
