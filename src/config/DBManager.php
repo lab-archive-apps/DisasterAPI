@@ -6,16 +6,13 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Exception;
 
 /**
- * データベース接続処理
+ * Database Connection Config
  */
 final class DBManager extends SingletonCore {
-
     // xml ファイル
     private $xml = __DIR__ . '/../../database.xml';
     // 実行環境
-    // private $env = 'production';
-    private $env = 'local';
-    // private $env = 'test';
+    private $env = 'development'; // production, development, test
 
     // Database Config Object
     private $config;
@@ -43,7 +40,7 @@ final class DBManager extends SingletonCore {
                 'database' => $this->config->db,
                 'username' => $this->config->username,
                 'password' => $this->config->password,
-                'port'     => 3306,
+                'port'     => $this->config->port,
                 'collation' => 'utf8_unicode_ci',
                 'charset'  => $this->config->charset,
             ]);

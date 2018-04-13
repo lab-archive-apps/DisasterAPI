@@ -5,20 +5,23 @@
         <db></db>
         <username></username>
         <password></password>
+        <port></port>
         <charset>utf8</charset>
     </production>
-    <local>
+    <development>
         <host>127.0.0.1</host>
         <db></db>
         <username></username>
         <password></password>
+        <port>3306</port>
         <charset>utf8</charset>
-    </local>
+    </development>
     <test>
         <host></host>
         <db></db>
         <username></username>
         <password></password>
+        <port></port>
         <charset></charset>
     </test>
 </database>
