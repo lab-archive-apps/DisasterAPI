@@ -12,7 +12,6 @@ class Section extends BaseModel {
 
     // enable params when called create method.
     protected $fillable = [
-        'name',
-        'label'
+        'name'
     ];
 }

@@ -43,16 +43,17 @@ class DisastersController extends BaseController{
             'date' => $params->post->date,
             'name' => $params->post->name,
             'season' => $params->post->season,
-            'area' => $params->post->area,
-            'prefecture' => $params->post->prefecture,
-            'city' => $params->post->city,
+            'area' => isset($params->post->area) ? $params->post->area : '',
+            'prefecture' => isset($params->post->prefecture) ? $params->post->prefecture : '',
+            'city' => isset($params->post->city) ? $params->post->city : '',
             'classification' => $params->post->classification,
-            'scale' => $params->post->scale,
+            'scale' => '',
         ]);
 
         if ($disaster->save()) {
             $this->res['result'] = 'success';
             $this->res['state'] = true;
+            $this->res['id'] = $disaster->id;
         }else{
             $this->res['error'] = '登録に失敗しました．';
         }

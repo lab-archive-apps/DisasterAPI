@@ -119,8 +119,7 @@ class SettingsController extends BaseController {
         $params = $request->getAttribute('params');
         $section = Section::find($params->post->id);
         $this->update($section, [
-            'name' => $params->post->name,
-            'label' => $params->post->label
+            'name' => $params->post->name
         ]);
         return $response->withJson($this->res);
     }
